@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE generatorConfiguration  
+  PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"  
+  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">  
+<!-- 在项目根目录下(pom.xml同级)打开命令行工具：mvn mybatis-generator:generate -->  
+<generatorConfiguration>  
+  
+        <!-- 配置成你本地的mysql-connector-java jar -->  
+        <classPathEntry  
+        location="D:\apache-maven\repository\mysql\mysql-connector-java\5.1.44\mysql-connector-java-5.1.44.jar" />  
+          
+  
+    <context id="baseTradeTables" targetRuntime="MyBatis3">  
+        <commentGenerator>  
+            <property name="suppressAllComments" value="true" />  
+        </commentGenerator>  
+          
+        <!-- 数据库地址、用户名、密码 -->  
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"  
+            connectionURL="jdbc:mysql://localhost:3306/simonli?characterEncoding=UTF-8" userId="root"  
+            password="root">  
+        </jdbcConnection>  
+  
+        <javaTypeResolver>  
+            <property name="forceBigDecimals" value="true" />  
+        </javaTypeResolver>  
+  
+        <!-- 后台生成 -->  
+        <!-- model -->  
+        <javaModelGenerator targetPackage="com.sail.simonli.server.model"  
+            targetProject="simonli">  
+            <property name="enableSubPackages" value="true" />  
+            <property name="trimStrings" value="true" />  
+        </javaModelGenerator>  
+          
+        <!-- Mapper映射 -->  
+        <sqlMapGenerator targetPackage="com.sail.simonli.server.dao"  
+            targetProject="simonli">  
+            <property name="enableSubPackages" value="true" />  
+        </sqlMapGenerator>  
+  
+        <!-- Mapper接口 -->  
+        <javaClientGenerator type="XMLMAPPER"  
+            targetPackage="com.sail.simonli.server.dao" targetProject="simonli">  
+            <property name="enableSubPackages" value="true" />  
+        </javaClientGenerator>  
+  
+        <!-- 表 -->  
+        <table tableName="s_user" domainObjectName="UserInfo"  
+               enableCountByExample="false" enableSelectByExample="false" enableUpdateByExample="false" enableDeleteByExample="false">  
+        </table>       
+    </context>  
+</generatorConfiguration>  

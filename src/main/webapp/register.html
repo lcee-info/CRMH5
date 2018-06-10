@@ -1,0 +1,247 @@
+<!doctype html>
+<html>
+	<head>
+		<title>注册</title>
+		<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no"/>
+	<meta content="yes" name="apple-mobile-web-app-capable" />
+	<meta content="telephone=no" name="format-detection" />
+	<meta name="renderer" content="webkit">
+	<meta name="keywords" content=""/>
+	<meta name="description" content=""/>
+	<link rel="stylesheet" href="./weui/lib/weui.min.css">
+	<link rel="stylesheet" href="./weui/css/jquery-weui.min.css" />
+	<link rel="stylesheet" href="./css/reset.css" />
+	<link rel="stylesheet" href="./css/flex.css" />
+	<link rel="stylesheet" href="./css/style.css" />
+	<!--[if lt IE 9 ]>
+	<script src="js/html5.js"></script>
+	<![endif]-->
+	<style type="text/css">
+	::-webkit-input-placeholder{/*Webkit browsers*/
+	    color:#ffffff;
+	    font-size:14px;
+	}
+	:-moz-placeholder{/*Mozilla Firefox 4 to 8*/
+	   color:#ffffff;
+	   font-size:14px;
+	}
+	::moz-placeholder{/*Mozilla Firefox 19+*/
+	   color:#ffffff;
+	   font-size:14px;
+	}
+	:-ms-input-placeholder{/*Internet Explorer 10+*/
+	    color:#ffffff;
+	    font-size:14px;
+	}
+		body{
+			background-image:url(/images/bg.png);
+			background-repeat:no-repeat ;
+			background-size:100% 100%; 
+			background-attachment: fixed;
+		}
+		
+	  .ico-mobile{
+		width: 22px;
+	    height: 30px;
+	    vertical-align: middle;
+	    display: inline-block;
+	    background-image: url(../images/icon-login.png);
+	    background-repeat: no-repeat;
+	    background-size: 22px auto;
+	    position: relative;
+	    background-position-x: 0;
+	    margin-right: 10px;
+	 }
+	 
+	  .ico-password{
+		width: 22px;
+	    height: 30px;
+	    vertical-align: middle;
+	    display: inline-block;
+	    background-image: url(../images/msgcode.png);
+	    background-repeat: no-repeat;
+	    background-size: 22px auto;
+	    position: relative;
+	    background-position-x: 0;
+	    margin-right: 10px;
+	 }
+	 .weui_dialog{
+	    -webkit-transform: translate(-50%,-50%);
+	    transform: translate(-50%,-50%);
+	    background-color: #e47725;
+	    text-align: center;
+	    border-radius: 10px;
+	    overflow: hidden;
+	 }
+	 
+	 .weui_dialog_ft{
+	 	display:none;
+	 }
+	</style>
+	</head>
+
+<body class="bgf">
+<section class="wrap">
+
+	<section class="main">
+
+<div class="top-fixed">
+</div>
+<div class="placeholder-header"></div>
+<!-- 底部悬浮 end -->
+
+		<section class="login-wrap fs13">
+			<form action="/user/register" id="registerForm" class="flex-box flex-col flex-col-stretch flex-between" style="min-height: 100vh;padding:30px 25px 20px;">
+				<div>
+
+					<div class="logo-wrap">
+						<img src="images/LOGO.png" alt="" class="block ma w100">
+					</div> 
+
+					<div class="inp-block flex-box"  >
+						<i class="ico-mobile block" ></i> 
+						<input type="tel" id="mobile" style="color:#fff;"  class="flex-grow-1" placeholder="请输入您的手机号" name="mobile">
+					</div>
+
+				<!-- 	<div class="mt10 flex-box flex-col-stretch">
+					<div class="inp-block flex-grow-1">
+						<input type="text" id="picCode" class="" placeholder="输入验证码" name="picCode">
+					</div>
+					<div class="code-wrap flex-grow-0">
+						<img src="images/default-code.png" alt="" class="block">
+					</div>
+				</div> -->
+
+					<div class="mt10 inp-block flex-box" >
+						<i class="ico-password block"></i>
+						<input type="text" id="smsCode" style="color:#fff;" class="flex-grow-1" placeholder="请输入您的短信验证码" name="smsCode">
+						<a href="javascript:;" style="color:#fff;" class="flex-grow-0 col6" id="sms_send">获取验证码</a>
+						<!--  <a href="javascript:;" class="flex-grow-0 col9">56s后重新获取</a>-->
+					</div>
+
+					<a href="javascript:;" class="btn btn-primary mt20" id="registerBtn">注　册</a>
+
+				</div>
+			</form>
+		</section>
+			<!-- 主体 end -->
+	</section>
+</section>
+
+<script src="./weui/lib/jquery-2.1.4.js"></script>
+<!-- <script src="weui/js/jquery-weui.min.js"></script> -->
+<script src="./weui/js/jquery-weui.js"></script>
+<script src="./weui/js/city-picker.min.js"></script>
+<script src="./weui/js/swiper.min.js"></script>
+<script src="./js/jquery.lazyload.min.js"></script>
+<script src="./js/jquery.raty.min.js"></script>
+<script src="./js/common.js"></script>
+
+<script>
+	//定义flag发送验证码
+	var mobileCode = 1;
+	
+	function countDownSendButton(sendButton, second){
+		var handle = setInterval(function(){
+			if(second > 0){
+				sendButton.attr("disabled",true);
+				sendButton.css("pointer-events","none");
+				sendButton.css("opacity","0.5");
+				sendButton.html( second-- +"秒重新获取");
+			}
+			else{
+				cancelCountDownSendButton(sendButton, handle);
+			}
+		},1000);
+	};
+	
+	function cancelCountDownSendButton(sendButton, handle){
+		clearInterval(handle);
+		sendButton.html("获取验证码").removeAttr("disabled");
+		sendButton.css("opacity","");
+	};
+	
+	$("#sms_send").click(function(){
+		var mobile = $("#mobile").val().trim();
+		
+		if(mobile == "" || mobile == null){
+			$.toast("请输入您的手机号码","text");
+			$("#mobile").focus();
+			return false;
+		}
+		
+		if(!checkTel(mobile)){
+			$.toast("电话号码格式不正确","text");
+			$("#mobile").focus();
+			return false;
+		}
+		
+		$.get(serverPath+"/user/sendSms/"+mobile, function(result){
+			countDownSendButton($("#sms_send"),120);
+		  });
+		
+	});
+
+	$("#registerBtn").click(function(){
+		
+		// 手机验证
+		var mobile = $("#mobile").val().trim();
+		if(mobile == "" || mobile == null){
+			$.toast("请输入您的手机号码","text");
+			$("#mobile").focus();
+			return false;
+		}
+		if(!checkTel(mobile)){
+			$.toast("电话号码格式不正确","text");
+			$("#mobile").focus();
+			return false;
+		}
+
+		//短信验证
+		var smsCode = $.trim($("#smsCode").val());
+		if(!smsCode){
+			$.toast("请进行短信验证","text");
+			return false;
+		};
+
+		//提交表单
+		var registerForm = $("#registerForm");
+			var data = registerForm.serialize(); //表单序列化
+
+
+			$.ajax({
+				url: serverPath+registerForm.attr("action"),
+				type: 'POST',
+				dataType: 'json',
+				data: data,
+				success:function(data){
+					if(data.status=='1'){
+						$.modal({
+					          id: "model_1",
+					          title: "注册成功",
+					          text: '<span>快来完善资料，发现更多惊喜</span><br><br><a href="xxwh.html" class="weui_btn weui_btn_warn" style="background-color:#dd5625">现在就去</a><br><a href="grxx.html" style="background-color:#de9864" class="weui_btn weui_btn_warn">以后再说</a><br><br>',
+					        });
+					}else{
+						alert(data.message);
+					}
+		        },
+		        error: function () {
+							$.hideLoading();
+							alert("网络超时，请再次尝试失败后联系管理员");
+		        }
+			})
+	});
+
+
+	function checkTel(tel){
+		// var isTel = /^[1][358]\d{9}$/;
+		// var isTel = /^0{0,1}(13[0-9]|15[7-9]|17[0-9]|153|156|18[7-9])[0-9]{8}$/;
+		var isTel = /^1[0-9]{10}$/;
+		return isTel.test(tel) ? true : false;
+	}
+	 
+</script>
+
+</body>
+</html>

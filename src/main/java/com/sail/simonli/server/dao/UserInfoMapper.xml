@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sail.simonli.server.dao.UserInfoMapper">
+  <resultMap id="BaseResultMap" type="com.sail.simonli.server.model.UserInfo">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="mobile" jdbcType="VARCHAR" property="mobile" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="sex" jdbcType="VARCHAR" property="sex" />
+    <result column="birthday" jdbcType="DATE" property="birthday" />
+    <result column="country" jdbcType="VARCHAR" property="country" />
+    <result column="country_name" jdbcType="VARCHAR" property="countryName" />
+    <result column="province" jdbcType="VARCHAR" property="province" />
+    <result column="province_name" jdbcType="VARCHAR" property="provinceName" />
+    <result column="city" jdbcType="VARCHAR" property="city" />
+    <result column="city_name" jdbcType="VARCHAR" property="cityName" />
+    <result column="openid" jdbcType="VARCHAR" property="openid" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="token" jdbcType="VARCHAR" property="token" />
+    <result column="finish" jdbcType="VARCHAR" property="finish" />
+    <result column="headimgurl" jdbcType="VARCHAR" property="headimgurl" />
+    <result column="nickname" jdbcType="VARCHAR" property="nickname" />
+    <result column="subscribe" jdbcType="VARCHAR" property="subscribe" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, mobile, name, sex, birthday, country, country_name, province, province_name, 
+    city, city_name, openid, remark, token, finish, headimgurl, nickname, subscribe
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from s_user
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  
+  <select id="loadUserByMobile" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from s_user
+    where mobile = #{mobile,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="loadUserByOpenid" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from s_user
+    where openid = #{openid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from s_user
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.sail.simonli.server.model.UserInfo">
+    insert into s_user (mobile, name, 
+      sex, birthday, country, 
+      country_name, province, province_name, 
+      city, city_name, openid, 
+      remark, token, finish, 
+      headimgurl, nickname, subscribe
+      )
+    values (#{mobile,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{sex,jdbcType=VARCHAR}, #{birthday,jdbcType=DATE}, #{country,jdbcType=VARCHAR}, 
+      #{countryName,jdbcType=VARCHAR}, #{province,jdbcType=VARCHAR}, #{provinceName,jdbcType=VARCHAR}, 
+      #{city,jdbcType=VARCHAR}, #{cityName,jdbcType=VARCHAR}, #{openid,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=VARCHAR}, #{token,jdbcType=VARCHAR}, #{finish,jdbcType=VARCHAR}, 
+      #{headimgurl,jdbcType=VARCHAR}, #{nickname,jdbcType=VARCHAR}, #{subscribe,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.sail.simonli.server.model.UserInfo">
+    insert into s_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="mobile != null">
+        mobile,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="sex != null">
+        sex,
+      </if>
+      <if test="birthday != null">
+        birthday,
+      </if>
+      <if test="country != null">
+        country,
+      </if>
+      <if test="countryName != null">
+        country_name,
+      </if>
+      <if test="province != null">
+        province,
+      </if>
+      <if test="provinceName != null">
+        province_name,
+      </if>
+      <if test="city != null">
+        city,
+      </if>
+      <if test="cityName != null">
+        city_name,
+      </if>
+      <if test="openid != null">
+        openid,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="token != null">
+        token,
+      </if>
+      <if test="finish != null">
+        finish,
+      </if>
+      <if test="headimgurl != null">
+        headimgurl,
+      </if>
+      <if test="nickname != null">
+        nickname,
+      </if>
+      <if test="subscribe != null">
+        subscribe,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="mobile != null">
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null">
+        #{birthday,jdbcType=DATE},
+      </if>
+      <if test="country != null">
+        #{country,jdbcType=VARCHAR},
+      </if>
+      <if test="countryName != null">
+        #{countryName,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null">
+        #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="provinceName != null">
+        #{provinceName,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="cityName != null">
+        #{cityName,jdbcType=VARCHAR},
+      </if>
+      <if test="openid != null">
+        #{openid,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="token != null">
+        #{token,jdbcType=VARCHAR},
+      </if>
+      <if test="finish != null">
+        #{finish,jdbcType=VARCHAR},
+      </if>
+      <if test="headimgurl != null">
+        #{headimgurl,jdbcType=VARCHAR},
+      </if>
+      <if test="nickname != null">
+        #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="subscribe != null">
+        #{subscribe,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sail.simonli.server.model.UserInfo">
+    update s_user
+    <set>
+      <if test="mobile != null">
+        mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        sex = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null">
+        birthday = #{birthday,jdbcType=DATE},
+      </if>
+      <if test="country != null">
+        country = #{country,jdbcType=VARCHAR},
+      </if>
+      <if test="countryName != null">
+        country_name = #{countryName,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null">
+        province = #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="provinceName != null">
+        province_name = #{provinceName,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        city = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="cityName != null">
+        city_name = #{cityName,jdbcType=VARCHAR},
+      </if>
+      <if test="openid != null">
+        openid = #{openid,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="token != null">
+        token = #{token,jdbcType=VARCHAR},
+      </if>
+      <if test="finish != null">
+        finish = #{finish,jdbcType=VARCHAR},
+      </if>
+      <if test="headimgurl != null">
+        headimgurl = #{headimgurl,jdbcType=VARCHAR},
+      </if>
+      <if test="nickname != null">
+        nickname = #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="subscribe != null">
+        subscribe = #{subscribe,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sail.simonli.server.model.UserInfo">
+    update s_user
+    set mobile = #{mobile,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=VARCHAR},
+      birthday = #{birthday,jdbcType=DATE},
+      country = #{country,jdbcType=VARCHAR},
+      country_name = #{countryName,jdbcType=VARCHAR},
+      province = #{province,jdbcType=VARCHAR},
+      province_name = #{provinceName,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      city_name = #{cityName,jdbcType=VARCHAR},
+      openid = #{openid,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      token = #{token,jdbcType=VARCHAR},
+      finish = #{finish,jdbcType=VARCHAR},
+      headimgurl = #{headimgurl,jdbcType=VARCHAR},
+      nickname = #{nickname,jdbcType=VARCHAR},
+      subscribe = #{subscribe,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

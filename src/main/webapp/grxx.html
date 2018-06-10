@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>个人信息</title>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no"/>
+	<meta content="yes" name="apple-mobile-web-app-capable" />
+	<meta content="telephone=no" name="format-detection" />
+	<meta name="renderer" content="webkit">
+	<meta name="keywords" content=""/>
+	<meta name="description" content=""/>
+	<link rel="stylesheet" href="./weui/lib/weui.min.css?t=2">
+	<link rel="stylesheet" href="./weui/css/jquery-weui.min.css?t=1" />
+<style>
+.form1{
+	background-image: url(./images/7.png);
+	background-size:100% auto;
+	background-repeat:repeat-x;
+}
+
+</style>
+
+  </head>
+
+  <body ontouchstart>
+
+    <header class='demos-header'>
+      <img src="./images/ad-show.png" style="width:100%">
+    </header>
+		<div class="weui-cells form1" style="margin-top:-10px">
+		  <div style="height:35px">
+		  </div>
+          <div class="weui-cell">
+            <div class="weui-cell__hd"><img src="./images/1.png" alt="" style="width:22px;margin-right:5px;display:block"></div>
+            <div class="weui-cell__bd">
+              <p>姓名</p>
+            </div>
+            <div class="weui-cell__ft" id="name"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__hd"><img src="./images/2.png" alt="" style="width:20px;margin-right:5px;display:block"></div>
+            <div class="weui-cell__bd">
+              <p>电话</p>
+            </div>
+            <div class="weui-cell__ft" id="mobile"></div>
+          </div>
+		  <div class="weui-cell">
+            <div class="weui-cell__hd"><img src="./images/3.png" alt="" style="width:22px;margin-right:5px;display:block"></div>
+            <div class="weui-cell__bd">
+              <p>生日</p>
+            </div>
+            <div class="weui-cell__ft" id="birthday"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__hd"><img src="./images/4.png" alt="" style="width:20px;margin-right:5px;display:block"></div>
+            <div class="weui-cell__bd">
+              <p>性别</p>
+            </div>
+            <div class="weui-cell__ft" id="sex"></div>
+          </div>
+		  <div class="weui-cell">
+            <div class="weui-cell__hd"><img src="./images/5.png" alt="" style="width:22px;margin-right:5px;display:block"></div>
+            <div class="weui-cell__bd">
+              <p>国家</p>
+            </div>
+            <div class="weui-cell__ft" id="country_name"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__hd"><img src="./images/6.png" alt="" style="width:20px;margin-right:5px;display:block"></div>
+            <div class="weui-cell__bd">
+              <p>城市</p>
+            </div>
+            <div class="weui-cell__ft" id="city_name"></div>
+          </div>
+        </div>
+		<br>
+		<div style="text-align:center">
+		 <a href="xxwh.html" class="weui-btn weui-btn_mini weui-btn_warn" style="background-color:#de5626;font-size:14px">点击完善资料</a>
+		 </div>
+<script src="./weui/lib/jquery-2.1.4.js"></script>
+<script src="./weui/js/jquery-weui.js"></script>
+<script src="./weui/lib/fastclick.js"></script>
+<script src="./js/common.js"></script>
+<script>
+  $(function() {
+    FastClick.attach(document.body);
+  });
+  
+$.ajax({
+	url: serverPath+"/user/findById",
+	type: 'POST',
+	dataType: 'json',
+	success:function(data){
+		if(data.status=='1'){
+			 var user = data.data;
+			 if(user!=null){
+				 $("#name").html(user.name);
+				 $("#mobile").html(user.mobile);
+				 $("#birthday").html(user.birthday);
+				 var sex = user.sex;
+				 if(sex=='1'){
+					 $("#sex").html("男");
+				 }else{
+					 $("#sex").html("女");
+				 }
+				 $("#country_name").html(user.countryName);
+				 $("#city_name").html(user.cityName);
+			 }
+		}else{
+			$.alert(data.message);
+		}
+    },
+    error: function () {
+				$.hideLoading();
+				$.alert('网络超时，请再次尝试失败后联系管理员');
+    }
+})
+</script>
+  </body>
+
+</html>

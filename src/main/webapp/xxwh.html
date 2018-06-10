@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>资料完善</title>
+    <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+	<link rel="stylesheet" href="./weui/lib/weui.min.css?t=2">
+	<link rel="stylesheet" href="./weui/css/jquery-weui.min.css?t=1" />
+<style>
+.form1{
+	background-image: url(./images/7.png);
+	background-size:100% auto;
+	background-repeat:repeat-x;
+}
+
+</style>
+
+  </head>
+
+  <body ontouchstart>
+
+    <header class='demos-header'>
+      <img src="./images/ad-show.png" style="width:100%;">
+    </header>
+		<div class="weui-cells form1 weui-cells_form" style="margin-top:-10px">
+		<form action="/user/save" id="registerForm" class="flex-box flex-col flex-col-stretch flex-between" style="min-height: 100vh;padding:0px 0px 10px;">
+    	<input type="hidden" id="id" name="id">
+        <input type="hidden" id="cityName" name="cityName">
+        <input type="hidden" id="city" name="city">
+		  <div style="height:35px">
+		  </div>
+          <div class="weui-cell">
+		   <div class="weui-cell__hd"><img src="./images/2-1.png" alt="" style="width:22px;margin-right:5px;display:block"></div>
+		   <div class="weui-cell__hd">
+			 <label class="weui-label">姓名</label>
+		   </div>
+			<div class="weui-cell__bd">
+				<input class="weui-input" type="text" name="name" id="name" placeholder="请输入姓名">
+			</div>
+          </div>
+		   <div class="weui-cell">
+		   <div class="weui-cell__hd">
+		   <img src="./images/2-2.png" alt="" style="width:22px;margin-right:5px;display:block"></div>
+		   <div class="weui-cell__hd">
+			 <label class="weui-label">性别</label>
+		   </div>
+			<div class="weui-cell__bd">
+				<select class="weui-select" name="sex" id="sex">
+				<option value="">请选择</option>
+                <option value="1">男</option>
+                <option value="2">女</option> 
+            </select>
+			</div>
+          </div>
+		   <div class="weui-cell">
+		   <div class="weui-cell__hd">
+		   <img src="./images/2-3.png" alt="" style="width:22px;margin-right:5px;display:block"></div>
+		   <div class="weui-cell__hd">
+			 <label class="weui-label">国家</label>
+		   </div>
+			<div class="weui-cell__bd">
+				<select class="weui-select" name="country" id="country">
+                <option value="中国">中国</option>
+            </select>
+			</div>
+          </div>
+		  <div class="weui-cell">
+		   <div class="weui-cell__hd">
+		   <img src="./images/2-4.png" alt="" style="width:22px;margin-right:5px;display:block"></div>
+		   <div class="weui-cell__hd">
+			 <label class="weui-label">城市</label>
+		   </div>
+			<div class="weui-cell__bd">
+				<input type="text" id='city_picker' class="weui-input"/>
+			</div>
+          </div>
+		  <div class="weui-cell">
+		   <div class="weui-cell__hd">
+		   <img src="./images/2-5.png" alt="" style="width:22px;margin-right:5px;display:block"></div>
+		   <div class="weui-cell__hd">
+			 <label class="weui-label">生日</label>
+		   </div>
+			<div class="weui-cell__bd">
+				 <input type="text" id="birthday" name="birthday" data-toggle='date' class="weui-input"/>
+			</div>
+          </div>
+          <br>
+	        <div style="text-align:center">
+			 <a href="javascript:;" id="sumbit" class="weui-btn weui-btn_mini weui-btn_warn" style="background-color:#de5626;font-size:14px">&nbsp;&nbsp;&nbsp;&nbsp;保存&nbsp;&nbsp;&nbsp;&nbsp;</a>
+			 </div>
+            </form>
+        </div>
+		
+<script src="./weui/lib/jquery-2.1.4.js"></script>
+<script src="./weui/js/jquery-weui.js"></script>
+<script src="./weui/lib/fastclick.js"></script>
+<script src="./weui/js/city-picker.min.js"></script>
+<script src="./js/common.js"></script>
+<script>
+  $(function() {
+    FastClick.attach(document.body);
+	$("#city_picker").cityPicker({
+    title: "请选择地址",
+    onChange: function (picker, values, displayValues) {//选择后触发的事件
+    	$("#city").val(values);
+    	$("#cityName").val(displayValues);
+    	}
+	});
+	
+$("#sumbit").click(function(){
+		
+		//提交表单
+		var registerForm = $("#registerForm");
+			var data = registerForm.serialize(); //表单序列化
+
+
+			$.ajax({
+				url: serverPath+registerForm.attr("action"),
+				type: 'POST',
+				dataType: 'json',
+				data: data,
+				success:function(data){
+					if(data.status=='1'){
+						document.location.href="grxx.html";
+					}else{
+						alert(data.message);
+					}
+		        },
+		        error: function () {
+							$.hideLoading();
+							alert("网络超时，请再次尝试失败后联系管理员");
+		        }
+			})
+	});
+  });
+ 
+	  $("#birthday").calendar({
+        value: ['2018-06-12'],
+        dateFormat: 'yyyy-mm-dd'  // 自定义格式的时候，不能通过 input 的value属性赋值 '2016年12月12日' 来定义初始值，这样会导致无法解析初始值而报错。只能通过js中设置 value 的形式来赋值，并且需要按标准形式赋值（yyyy-mm-dd 或者时间戳)
+      });
+      
+      $(document).ready(function(){
+    	  $.ajax({
+    			url: serverPath+"/user/findById",
+    			type: 'POST',
+    			dataType: 'json',
+    			success:function(data){
+    				if(data.status){
+    					 var user = data.data;
+    					 $("#id").val(user.id);
+    					 $("#name").val(user.name);
+    					 $("#mobile").val(user.mobile);
+    					 $("#birthday").val(user.birthday);
+    					 $("#sex").val(user.sex);
+    					 $("#country").val(user.country);
+    					 $("#city_picker").val(user.cityName);
+    					 $("#city").val(user.city);
+    					 $("#cityName").val(user.cityName);
+    					 
+    				}else{
+    					$.alert(data.message);
+    				}
+    		    },
+    		    error: function () {
+    						$.hideLoading();
+    						$.alert('网络超时，请再次尝试失败后联系管理员');
+    		    }
+    		})
+    	});
+      
+      
+</script>
+  </body>
+
+</html>
