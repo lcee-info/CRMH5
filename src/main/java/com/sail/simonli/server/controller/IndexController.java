@@ -3,8 +3,6 @@ package com.sail.simonli.server.controller;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-
-import com.sail.simonli.server.entity.User;
 import com.sail.simonli.server.model.UserInfo;
 
 import java.io.IOException;
@@ -44,6 +42,8 @@ public class IndexController {
 			}
 			
 			resp.sendRedirect("register.html");
+			
+			return ;
 			
 		} catch (IOException e) {
 			

@@ -1,0 +1,125 @@
+/**
+ * 
+ */
+package com.sail.simonli.server.gary;
+
+import java.text.SimpleDateFormat;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.log4j.Logger;
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import com.sail.simonli.server.model.UserInfo;
+import com.sail.simonli.server.util.CountryMap;
+import com.sail.simonli.server.util.DateUtils;
+
+
+/**
+ * @author admin
+ *
+ */
+public class Utils {
+
+	private static Logger logger=Logger.getLogger(Utils.class);
+	
+		public static void save(HttpServletRequest request,UserInfo user) {
+			
+		    JSONObject json = new JSONObject();
+		    
+	  	    json.put("Country__c", "中国");
+	  	    
+	  	    String sex = user.getSex();
+	  	    
+		    json.put("Gender__c", sex.equals("1")?"男":"女"); //
+		    
+		    
+		    /**
+		     * 省市需要处理？？？？？？？？？
+		     */
+		    String provinceCode="",cityCode="";
+		    String  city = user.getCity();
+		    if(!city.isEmpty()) {
+		    	
+		    	String[] province = city.split(",");
+		    	
+		    	provinceCode=province[0];
+		    	
+		    	cityCode=province[1];
+		    }
+		    
+		    
+		    json.put("Province__c", CountryMap.getProvinceMap(provinceCode)); //省
+		    
+		    json.put("City__c",CountryMap.getCityMap(cityCode)); //市
+		    
+		   // json.put("CustomerName__c", user.getName());//姓名
+		    
+		    json.put("Name", user.getName());//姓名
+		    
+		    json.put("Birthday__c", DateUtils.datetoStr(user.getBirthday(), "yyyy-MM-dd"));//生日
+		    
+		    //json.put("PhoneNumber__c", user.getMobile());
+		    String moblie =user.getMobile();
+		    
+		    Map<String,String> map = SFDCDataCtrlUtil.upsertToSFDCData("Account", json,"PhoneNumber__c" ,moblie);
+		   
+		    logger.info("ID:"+map.get("ID"));
+			
+		}
+		
+		public static UserInfo query(UserInfo user) {//查询
+			
+			String sql = "select+Id,name,Province__c,City__c,CustomerName__c,Birthday__c,Gender__c+from+Account+where+PhoneNumber__c='"+user.getMobile()+"'";
+
+			JSONArray jsonArray=SFDCDataCtrlUtil.getForSFDCData(sql);
+			
+			logger.info("jsonArray:"+jsonArray);
+			
+			if(jsonArray!=null&&jsonArray.length()>0) {
+				
+				JSONObject obj = jsonArray.getJSONObject(0);
+				
+				String Birthday__c = obj.getString("Birthday__c");
+				
+				String City__c = obj.getString("City__c");
+				
+				String Province__c = obj.getString("Province__c");
+				
+				if(City__c!=null&&Province__c!=null) {
+					
+					user.setCity(CountryMap.getProvinceCodeMap(Province__c)+","+CountryMap.getCityCodeMap(City__c));
+					
+				}
+				
+				String name = obj.getString("name");
+				
+				user.setName(name);
+				
+				String Gender__c = obj.getString("Gender__c");
+				
+				if(Gender__c.equals("男")) {
+					
+					user.setSex("1");
+					
+				}else if(Gender__c.equals("女")){
+					
+					user.setSex("2");
+				}
+				
+				if(Birthday__c!=null) {
+					
+					SimpleDateFormat sformat = new SimpleDateFormat("yyyy-MM-dd");
+					
+					user.setBirthday(DateUtils.str2Date(Birthday__c, sformat));
+					
+				}
+				
+			}
+			return user;
+			
+		}
+		
+}

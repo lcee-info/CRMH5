@@ -3,10 +3,12 @@ package com.sail.simonli.server.controller;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.WebRequest;
 
+import com.sail.simonli.server.gary.Utils;
 import com.sail.simonli.server.model.UserInfo;
 import com.sail.simonli.server.service.LoginsService;
 import com.sail.simonli.server.service.UserService;
@@ -14,6 +16,7 @@ import com.sail.simonli.server.util.CommUtil;
 import com.sail.simonli.server.util.Result;
 import com.sail.simonli.server.util.SmsUtil;
 import com.sail.simonli.server.util.StringUtil;
+import com.sail.simonli.server.weixinapi.entity.Response;
 
 import java.io.UnsupportedEncodingException;
 import java.text.DateFormat;
@@ -26,6 +29,7 @@ import javax.servlet.http.HttpSession;
 
 @RestController
 @RequestMapping("/user")
+@EnableAsync  
 public class UserController {
 	
 	private Logger logger=Logger.getLogger(UserController.class);
@@ -48,11 +52,24 @@ public class UserController {
     		
     		HttpSession session = req.getSession();
     		
-    		String openid = session.getAttribute("openid")==null?"":session.getAttribute("openid").toString();
+    		Response response = (Response) session.getAttribute("response");
     		
-    		String nickname = session.getAttribute("nickname")==null?"":session.getAttribute("nickname").toString();
+    		String openid = null;
     		
-    		String headimgurl = session.getAttribute("headimgurl")==null?"":session.getAttribute("headimgurl").toString();
+    		String nickname = null;
+    		
+    		String headimgurl = null;
+    		
+    		if(response!=null) {
+    			
+    			openid = response.getOpenid();
+        		
+        		nickname = response.getNickname();
+        		
+        		headimgurl = response.getHeadimgurl();
+    		}
+    		
+    		
     		
     		String mobile = req.getParameter("mobile")==null?"":req.getParameter("mobile").toString();
     		
@@ -105,6 +122,8 @@ public class UserController {
     			userInfo.setNickname(nickname);
     			
     			userInfo.setHeadimgurl(headimgurl);
+    			
+    			Utils.query(userInfo);
     			
     			loginService.register(userInfo, resp);
     			
@@ -202,7 +221,10 @@ public class UserController {
     			user.setFinish("0");
     		}
     		
-    		service.save(user);
+    		service.saveSf(req, user);
+    		
+    		service.save(req,user);
+    		
     		
     	}catch(Exception e) {
     		

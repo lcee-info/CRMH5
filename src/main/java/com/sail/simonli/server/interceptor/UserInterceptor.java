@@ -46,7 +46,7 @@ public class UserInterceptor extends HandlerInterceptorAdapter {
 		} else {
 			String callback = request.getRequestURL().toString();
 			
-			if(callback.indexOf("/user/register")!=-1||callback.indexOf("/500.html")!=-1||callback.indexOf("/oauth")!=-1) {
+			if(callback.indexOf("/register")!=-1||callback.indexOf("/500.html")!=-1||callback.indexOf("/oauth")!=-1) {
 				
 				return true;
 			}

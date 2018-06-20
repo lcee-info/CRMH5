@@ -1,14 +1,10 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>个人信息</title>
+    <title>资料完善</title>
     <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no"/>
-	<meta content="yes" name="apple-mobile-web-app-capable" />
-	<meta content="telephone=no" name="format-detection" />
-	<meta name="renderer" content="webkit">
-	<meta name="keywords" content=""/>
-	<meta name="description" content=""/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 	<link rel="stylesheet" href="./weui/lib/weui.min.css?t=2">
 	<link rel="stylesheet" href="./weui/css/jquery-weui.min.css?t=1" />
 <style>
@@ -16,105 +12,206 @@
 	background-image: url(./images/7.png);
 	background-size:100% auto;
 	background-repeat:repeat-x;
+	margin:0 10px;
 }
 
+.personTop{
+	height:180px;
+	background-color:#e47725;
+	/**background-image: url();*/
+	background-size:100% auto;
+	background-repeat:repeat-x;
+	width:100%;
+	text-align: center;
+	position:absolute;
+	 left:0px; 
+	 top:0px;
+}
+
+.personTop .headimg {
+
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 3px solid #fff; overflow: hidden; 
+   	margin:20px auto 5px;
+}
 </style>
 
   </head>
 
   <body ontouchstart>
 
-    <header class='demos-header'>
-      <img src="./images/ad-show.png" style="width:100%">
+    <header>
+    	<div class="personTop">
+    		<img class="headimg" src="http://wx.qlogo.cn/mmopen/zhK3MN44IcibtzxZibicddSyp4qVX3rTtfMZsXQwa5mArMmI4A44uJgQyevo9VhePyUbv6MwhsWTzrqttXsUdzJL0LcT5I9reGA/0" alt="会员头像缩略图">
+    		<p id="nickname">杨</p>
+    	</div>
     </header>
-		<div class="weui-cells form1" style="margin-top:-10px">
+		<div class="weui-cells form1 weui-cells_form" style="margin-top:-10px;position:absolute;top:168px;">
+		<form action="/user/save" id="registerForm" class="flex-box flex-col flex-col-stretch flex-between" style="min-height: 100vh;padding:0px 0px 10px;">
+    	<input type="hidden" id="id" name="id">
+        <input type="hidden" id="cityName" name="cityName">
+        <input type="hidden" id="countryName" name="countryName">
+        <input type="hidden" id="city" name="city">
+        
 		  <div style="height:35px">
 		  </div>
           <div class="weui-cell">
-            <div class="weui-cell__hd"><img src="./images/1.png" alt="" style="width:22px;margin-right:5px;display:block"></div>
-            <div class="weui-cell__bd">
-              <p>姓名</p>
-            </div>
-            <div class="weui-cell__ft" id="name"></div>
+		   <div class="weui-cell__hd"><img src="./images/2-1.png" alt="" style="width:22px;margin-right:5px;display:block"></div>
+		   <div class="weui-cell__hd">
+			 <label class="weui-label">姓名</label>
+		   </div>
+			<div class="weui-cell__bd">
+				<input class="weui-input" type="text" readOnly name="name" id="name" placeholder="请输入姓名">
+			</div>
           </div>
-          <div class="weui-cell">
-            <div class="weui-cell__hd"><img src="./images/2.png" alt="" style="width:20px;margin-right:5px;display:block"></div>
-            <div class="weui-cell__bd">
-              <p>电话</p>
-            </div>
-            <div class="weui-cell__ft" id="mobile"></div>
+		   <div class="weui-cell">
+		   <div class="weui-cell__hd">
+		   <img src="./images/2-2.png" alt="" style="width:22px;margin-right:5px;display:block"></div>
+		   <div class="weui-cell__hd">
+			 <label class="weui-label">性别</label>
+		   </div>
+			<div class="weui-cell__bd">
+				<select class="weui-select" name="sex" id="sex" readOnly>
+				<option value="">请选择</option>
+                <option value="1">男</option>
+                <option value="2">女</option> 
+            </select>
+			</div>
+          </div>
+		   <div class="weui-cell">
+		   <div class="weui-cell__hd">
+		   <img src="./images/2-3.png" alt="" style="width:22px;margin-right:5px;display:block"></div>
+		   <div class="weui-cell__hd">
+			 <label class="weui-label">国家</label>
+		   </div>
+			<div class="weui-cell__bd">
+				<select class="weui-select" name="country" id="country" readOnly>
+                <option selected value="中国">中国</option>
+            </select>
+			</div>
           </div>
 		  <div class="weui-cell">
-            <div class="weui-cell__hd"><img src="./images/3.png" alt="" style="width:22px;margin-right:5px;display:block"></div>
-            <div class="weui-cell__bd">
-              <p>生日</p>
-            </div>
-            <div class="weui-cell__ft" id="birthday"></div>
-          </div>
-          <div class="weui-cell">
-            <div class="weui-cell__hd"><img src="./images/4.png" alt="" style="width:20px;margin-right:5px;display:block"></div>
-            <div class="weui-cell__bd">
-              <p>性别</p>
-            </div>
-            <div class="weui-cell__ft" id="sex"></div>
+		   <div class="weui-cell__hd">
+		   <img src="./images/2-4.png" alt="" style="width:22px;margin-right:5px;display:block"></div>
+		   <div class="weui-cell__hd">
+			 <label class="weui-label">城市</label>
+		   </div>
+			<div class="weui-cell__bd">
+				<input type="text" id='city_picker' class="weui-input"/>
+			</div>
           </div>
 		  <div class="weui-cell">
-            <div class="weui-cell__hd"><img src="./images/5.png" alt="" style="width:22px;margin-right:5px;display:block"></div>
-            <div class="weui-cell__bd">
-              <p>国家</p>
-            </div>
-            <div class="weui-cell__ft" id="country_name"></div>
+		   <div class="weui-cell__hd">
+		   <img src="./images/2-5.png" alt="" style="width:22px;margin-right:5px;display:block"></div>
+		   <div class="weui-cell__hd">
+			 <label class="weui-label">生日</label>
+		   </div>
+			<div class="weui-cell__bd">
+				 <input type="text" id="birthday" name="birthday" data-toggle='date' class="weui-input"/>
+			</div>
           </div>
-          <div class="weui-cell">
-            <div class="weui-cell__hd"><img src="./images/6.png" alt="" style="width:20px;margin-right:5px;display:block"></div>
-            <div class="weui-cell__bd">
-              <p>城市</p>
-            </div>
-            <div class="weui-cell__ft" id="city_name"></div>
-          </div>
+          <br>
+	        <div style="text-align:center">
+			  <a href="xxwh.html" class="weui-btn weui-btn_mini weui-btn_warn" id="button_1" style="background-color:#de5626;font-size:14px">点击完善资料</a>
+			 </div>
+            </form>
         </div>
-		<br>
-		<div style="text-align:center">
-		 <a href="xxwh.html" class="weui-btn weui-btn_mini weui-btn_warn" style="background-color:#de5626;font-size:14px">点击完善资料</a>
-		 </div>
+		
 <script src="./weui/lib/jquery-2.1.4.js"></script>
 <script src="./weui/js/jquery-weui.js"></script>
 <script src="./weui/lib/fastclick.js"></script>
+<script src="./weui/js/city-picker.min.js"></script>
 <script src="./js/common.js"></script>
 <script>
   $(function() {
     FastClick.attach(document.body);
+    /**
+	$("#city_picker").cityPicker({
+    title: "请选择地址",
+    showDistrict: false,
+    onChange: function (picker, values, displayValues) {//选择后触发的事件
+    	$("#city").val(values);
+    	$("#cityName").val(displayValues);
+    	}
+	});
+    */
+	
+$("#sumbit").click(function(){
+		
+		//提交表单
+		var registerForm = $("#registerForm");
+			var data = registerForm.serialize(); //表单序列化
+			
+			$("#countryName").val($("#country").val());
+			$.showLoading("正在进行保存...");
+			$.ajax({
+				url: serverPath+registerForm.attr("action"),
+				type: 'POST',
+				dataType: 'json',
+				data: data,
+				success:function(data){
+					$.hideLoading();
+					if(data.status=='1'){
+						$.alert("保存成功",function(){
+							document.location.href="grxx.html";
+						});
+					}else{
+						$.alert(data.message);
+					}
+		        },
+		        error: function () {
+							$.hideLoading();
+							alert("网络超时，请再次尝试失败后联系管理员");
+		        }
+			})
+	});
   });
-  
-$.ajax({
-	url: serverPath+"/user/findById",
-	type: 'POST',
-	dataType: 'json',
-	success:function(data){
-		if(data.status=='1'){
-			 var user = data.data;
-			 if(user!=null){
-				 $("#name").html(user.name);
-				 $("#mobile").html(user.mobile);
-				 $("#birthday").html(user.birthday);
-				 var sex = user.sex;
-				 if(sex=='1'){
-					 $("#sex").html("男");
-				 }else{
-					 $("#sex").html("女");
-				 }
-				 $("#country_name").html(user.countryName);
-				 $("#city_name").html(user.cityName);
-			 }
-		}else{
-			$.alert(data.message);
-		}
-    },
-    error: function () {
-				$.hideLoading();
-				$.alert('网络超时，请再次尝试失败后联系管理员');
-    }
-})
+ 
+	  $("#birthday").calendar({
+        value: ['2018-06-12'],
+        dateFormat: 'yyyy-mm-dd'  // 自定义格式的时候，不能通过 input 的value属性赋值 '2016年12月12日' 来定义初始值，这样会导致无法解析初始值而报错。只能通过js中设置 value 的形式来赋值，并且需要按标准形式赋值（yyyy-mm-dd 或者时间戳)
+      });
+      
+      $(document).ready(function(){
+    	  $.ajax({
+    			url: serverPath+"/user/findById",
+    			type: 'POST',
+    			dataType: 'json',
+    			success:function(data){
+    				if(data.status){
+    					 var user = data.data;
+    					 $("#id").val(user.id);
+    					 $("#name").val(user.name);
+    					 $("#mobile").val(user.mobile);
+    					 $("#birthday").val(user.birthday);
+    					 $("#sex").val(user.sex);
+    					// $("#country").val(user.country);
+    					// $("#countryName").val(user.countryName);
+    					 $("#city_picker").val(user.cityName);
+    					 $("#city").val(user.city);
+    					 $("#cityName").val(user.cityName);
+    					 //$(".personTop").css("background-image","url(http://wx.qlogo.cn/mmopen/zhK3MN44IcibtzxZibicddSyp4qVX3rTtfMZsXQwa5mArMmI4A44uJgQyevo9VhePyUbv6MwhsWTzrqttXsUdzJL0LcT5I9reGA/0)");
+    					 if(user.headimgurl!=''){
+    						 $(".headimg").attr("src",user.headimgurl);	 
+    						 $(".personTop").css("background-image","url("+user.headimgurl+")");
+    					 }
+    					 if(user.nickname){
+    						 $("#nickname").text(user.nickname);
+    					 }
+    				}else{
+    					$.alert(data.message);
+    				}
+    		    },
+    		    error: function () {
+    						$.hideLoading();
+    						$.alert('网络超时，请再次尝试失败后联系管理员');
+    		    }
+    		})
+    	});
+      
+      
 </script>
   </body>
 

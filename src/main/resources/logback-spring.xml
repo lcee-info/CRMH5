@@ -35,9 +35,11 @@
     </logger>  
     <!-- name包必须能够扫描到所以类，包括启动类 -->  
     <logger  name="com.sail.simonli.server" level="debug" additivity="false">  
-        <appender-ref ref="stdout" />  
+        <appender-ref ref="stdout" />
+        <appender-ref ref="springboot" />  
     </logger>  
     <root level="info">  
         <appender-ref ref="stdout" />  
+        <appender-ref ref="springboot" />  
     </root>  
 </configuration>    

@@ -19,3 +19,16 @@ logging:
   level:
     root: INFO
     com.sail.simonli: DEBUG
+salesforce:
+  username: crm@trayton.com.develop01
+  password: demo1234
+  client_id: 3MVG99S6MzYiT5k9H2ZS9jfMygW.e8a4ONaI1A6.OEmGBs2b0NlBqpPZw90Sh2LROUuD5MeutZUFVv88OoLBX
+  client_secret: 5867733029077662500
+  grantservice: /services/oauth2/token?grant_type=password
+  loginurl: https://test.salesforce.com
+  rest_endpoint: /services/data/v36.0/
+weixin:
+  appid: wxd86e2b0f2f4be055
+  secret: sssdssddddsdsds
+  domain: http://127.0.0.1:8000/simonli
+    

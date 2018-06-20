@@ -12,22 +12,49 @@
 	background-image: url(./images/7.png);
 	background-size:100% auto;
 	background-repeat:repeat-x;
+	margin:0 10px;
 }
 
+.personTop{
+	height:180px;
+	background-color:#e47725;
+	/**background-image: url();*/
+	background-size:100% auto;
+	background-repeat:repeat-x;
+	width:100%;
+	text-align: center;
+	position:absolute;
+	 left:0px; 
+	 top:0px;
+}
+
+.personTop .headimg {
+
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 3px solid #fff; overflow: hidden; 
+   	margin:20px auto 5px;
+}
 </style>
 
   </head>
 
   <body ontouchstart>
 
-    <header class='demos-header'>
-      <img src="./images/ad-show.png" style="width:100%;">
+    <header>
+    	<div class="personTop">
+    		<img class="headimg" src="http://wx.qlogo.cn/mmopen/zhK3MN44IcibtzxZibicddSyp4qVX3rTtfMZsXQwa5mArMmI4A44uJgQyevo9VhePyUbv6MwhsWTzrqttXsUdzJL0LcT5I9reGA/0" alt="会员头像缩略图">
+    		<p id="nickname">杨</p>
+    	</div>
     </header>
-		<div class="weui-cells form1 weui-cells_form" style="margin-top:-10px">
+		<div class="weui-cells form1 weui-cells_form" style="margin-top:-10px;position:absolute;top:168px;">
 		<form action="/user/save" id="registerForm" class="flex-box flex-col flex-col-stretch flex-between" style="min-height: 100vh;padding:0px 0px 10px;">
     	<input type="hidden" id="id" name="id">
         <input type="hidden" id="cityName" name="cityName">
+        <input type="hidden" id="countryName" name="countryName">
         <input type="hidden" id="city" name="city">
+        
 		  <div style="height:35px">
 		  </div>
           <div class="weui-cell">
@@ -60,8 +87,8 @@
 			 <label class="weui-label">国家</label>
 		   </div>
 			<div class="weui-cell__bd">
-				<select class="weui-select" name="country" id="country">
-                <option value="中国">中国</option>
+				<select class="weui-select" name="country" id="country" readOnly>
+                <option selected value="中国">中国</option>
             </select>
 			</div>
           </div>
@@ -102,6 +129,7 @@
     FastClick.attach(document.body);
 	$("#city_picker").cityPicker({
     title: "请选择地址",
+    showDistrict: false,
     onChange: function (picker, values, displayValues) {//选择后触发的事件
     	$("#city").val(values);
     	$("#cityName").val(displayValues);
@@ -113,18 +141,22 @@ $("#sumbit").click(function(){
 		//提交表单
 		var registerForm = $("#registerForm");
 			var data = registerForm.serialize(); //表单序列化
-
-
+			
+			$("#countryName").val($("#country").val());
+			$.showLoading("正在进行保存...");
 			$.ajax({
 				url: serverPath+registerForm.attr("action"),
 				type: 'POST',
 				dataType: 'json',
 				data: data,
 				success:function(data){
+					$.hideLoading();
 					if(data.status=='1'){
-						document.location.href="grxx.html";
+						$.alert("保存成功",function(){
+							document.location.href="grxx.html";
+						});
 					}else{
-						alert(data.message);
+						$.alert(data.message);
 					}
 		        },
 		        error: function () {
@@ -153,11 +185,19 @@ $("#sumbit").click(function(){
     					 $("#mobile").val(user.mobile);
     					 $("#birthday").val(user.birthday);
     					 $("#sex").val(user.sex);
-    					 $("#country").val(user.country);
+    					// $("#country").val(user.country);
+    					// $("#countryName").val(user.countryName);
     					 $("#city_picker").val(user.cityName);
     					 $("#city").val(user.city);
     					 $("#cityName").val(user.cityName);
-    					 
+    					 //$(".personTop").css("background-image","url(http://wx.qlogo.cn/mmopen/zhK3MN44IcibtzxZibicddSyp4qVX3rTtfMZsXQwa5mArMmI4A44uJgQyevo9VhePyUbv6MwhsWTzrqttXsUdzJL0LcT5I9reGA/0)");
+    					 if(user.headimgurl!=''){
+    						 $(".headimg").attr("src",user.headimgurl);	 
+    						 $(".personTop").css("background-image","url("+user.headimgurl+")");
+    					 }
+    					 if(user.nickname){
+    						 $("#nickname").text(user.nickname);
+    					 }
     				}else{
     					$.alert(data.message);
     				}

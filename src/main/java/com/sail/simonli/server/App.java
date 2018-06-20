@@ -8,6 +8,7 @@ import org.springframework.boot.Banner.Mode;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.scheduling.annotation.EnableAsync;
 
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
@@ -18,6 +19,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @SpringBootApplication
 @ComponentScan
 @EnableSwagger2
+@EnableAsync
 @MapperScan("com.sail.simonli.server.dao")
 public class App 
 {

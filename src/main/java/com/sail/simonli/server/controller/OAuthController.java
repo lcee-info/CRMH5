@@ -26,6 +26,9 @@ public class OAuthController {
 	
 	@Autowired
 	private UserService service;
+	@Autowired
+	private CustomProperty customProperty;
+	
 	
     @RequestMapping(value = "/index", method = RequestMethod.GET)
     public void index(HttpServletRequest req, HttpServletResponse resp) {
@@ -56,8 +59,10 @@ public class OAuthController {
     		}
     		
     		String callback = req.getParameter("callback") == null?"":req.getParameter("callback").toString();
-    		
-    		String redirect_uri=URLEncoder.encode(CustomProperty.DOMIAN+"/oauth/code", "utf-8");
+    		 
+    		//String redirect_uri=URLEncoder.encode(getReqPath(req)+"/oauth/code", "utf-8");
+    		String redirect_uri=URLEncoder.encode(customProperty.getDomain()+"/oauth/code", "utf-8");
+    		logger.debug("redirect_uri:"+redirect_uri);
     		
 			String codeUrl = WxUserAPI.getCodeUrl(redirect_uri, callback,true);
 			
@@ -83,18 +88,19 @@ public class OAuthController {
 		
 		String code = getPara(req,"code");
 		
-		String redirect_uri = getPara(req,"redirect_uri");
+		//String redirect_uri = getPara(req,"redirect_uri");
+		String redirect_uri = null;
 		try {
 		
 			if (StringUtils.isNotBlank(code)) {
 				
 				logger.info("code:"+code);
 				
-				state = getPara(req,"state");
+				redirect_uri = getPara(req,"state");
 				
-				logger.info(" state:"+state);
+				logger.info(" state:"+redirect_uri);
 				
-				Response response = WxUserAPI.getUserinfo(code);
+				Response response = WxUserAPI.getAccessToken(code);
 				
 				logger.info("response:"+response);
 				
@@ -106,6 +112,10 @@ public class OAuthController {
 					
 					openid = response.getOpenid();
 					
+					Response userInfo = WxUserAPI.getUserinfo(response);
+
+					userInfo.setOpenid(openid);
+					
 					UserInfo user = service.loadUserByOpenid(openid);
 					
 					if(user != null) {
@@ -114,7 +124,7 @@ public class OAuthController {
 			    			
 					} else {
 						
-						req.getSession().setAttribute("openid", openid);
+						req.getSession().setAttribute("response", userInfo);
 						
 					}
 					
@@ -137,5 +147,15 @@ public class OAuthController {
 			
 	}
 
+    
+    private String getReqPath(HttpServletRequest request) {
+    	
+    	String requestUrl = request.getScheme() //当前链接使用的协议
+    	        +"://" + request.getServerName()//服务器地址  
+     	        + ":" + request.getServerPort() //端口号  
+    	        + request.getContextPath();
+    	
+    	return requestUrl;
+    }
     
 }

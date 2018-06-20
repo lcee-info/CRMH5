@@ -7,9 +7,9 @@ import org.springframework.stereotype.Component;
 @ConfigurationProperties(prefix = "weixin")
 public class CustomProperty {
 	
-	public static final String DOMIAN = "http://www.ct918.com";
+	private String domain;
 	
-	private String appid="wxd86e2b0f2f4be055";
+	private String appid="wx5d64ee9f13985706";
 	
 	private String secret="ba2bf3b8e2815737e27df65b2cf66801";
 	
@@ -39,7 +39,14 @@ public class CustomProperty {
 	public void setScope(String scope) {
 		this.scope = scope;
 	}
-	
-	
+
+	public String getDomain() {
+		return domain;
+	}
+
+	public void setDomain(String domain) {
+		this.domain = domain;
+	}
+
 
 }
