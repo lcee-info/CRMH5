@@ -95,9 +95,9 @@ public class UserController {
 				 
 			}
     		
-    		String code="1234";
-			//String code=session.getAttribute("smscode"+mobile)==null?"":session.getAttribute("smscode"+mobile).toString();
-			//session.removeAttribute("smscode"+mobile);
+    		//String code="1234";
+			  String code=session.getAttribute("smscode"+mobile)==null?"":session.getAttribute("smscode"+mobile).toString();
+			  session.removeAttribute("smscode"+mobile);
 			
 			if(!smsCode.equals(code)){
 				
@@ -126,6 +126,8 @@ public class UserController {
     			Utils.query(userInfo);
     			
     			loginService.register(userInfo, resp);
+    			
+    			service.saveSf(req, user);
     			
     			session.setAttribute("user", userInfo);
     			
