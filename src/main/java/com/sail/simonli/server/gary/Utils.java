@@ -33,7 +33,9 @@ public class Utils {
 	  	    
 	  	    String sex = user.getSex();
 	  	    
-		    json.put("Gender__c", sex.equals("1")?"男":"女"); //
+	  	    if(sex != null && !"".equals(sex)){
+		        json.put("Gender__c", sex.equals("1")?"男":"女"); //
+	  	    }
 		    
 		    
 		    /**
@@ -50,16 +52,22 @@ public class Utils {
 		    	cityCode=province[1];
 		    }
 		    
+		    if(city != null && !"".equals(city)){
 		    
-		    json.put("Province__c", CountryMap.getProvinceMap(provinceCode)); //省
-		    
-		    json.put("City__c",CountryMap.getCityMap(cityCode)); //市
+				    json.put("Province__c", CountryMap.getProvinceMap(provinceCode)); //省
+				    
+				    json.put("City__c",CountryMap.getCityMap(cityCode)); //市
+		    }
 		    
 		   // json.put("CustomerName__c", user.getName());//姓名
 		    
-		    json.put("Name", user.getName());//姓名
+		    if(user.getName() != null && !"".equals(user.getName())){
+		         json.put("Name", user.getName());//姓名
+		    }
 		    
-		    json.put("Birthday__c", DateUtils.datetoStr(user.getBirthday(), "yyyy-MM-dd"));//生日
+		    if(user.getBirthday() != null ){
+		         json.put("Birthday__c", DateUtils.datetoStr(user.getBirthday(), "yyyy-MM-dd"));//生日
+		    }
 		    
 		    //json.put("PhoneNumber__c", user.getMobile());
 		    String moblie =user.getMobile();
