@@ -141,11 +141,16 @@
 <div id="simonys" class="weui-popup__container">
   <div class="weui-popup__overlay"></div>
   <div class="weui-popup__modal">
-     <img alt="" src="./images/ys.png" style="width:100%">
-     <div class="yszctk">
-     	 = 隐私政策条款 =
+  	<div style="position:fixed; left:0; top:0; width:100%; height:176px; z-index:9999; ">
+	     <img alt="" src="./images/ys.png" style="width:100%">
+	     <div class="yszctk">
+	     	 = 隐私政策条款 =
+	     </div>
      </div>
-     <div style="margin:5px 2px">
+     <div id="gdqy" style="position:fixed; top:180px;bottom:0px;margin:5px 0px;background:#fff;padding:0 5px;width: 100%;overflow-y: scroll; ">
+     	<div style="position:fixed; top:300px;right:10px;z-index:9999;background:#F9D5CB; " onclick="gd()">
+     		<img alt="" src="./images/xl.png" >
+     	</div>
      <p >
        上海西蒙李家居用品有限公司（以下简称“西蒙李家居”、“我们”），非常重视您信息保障的权利及我们的法律义务。本隐私政策描述我们如何通过西蒙李家居品牌微信公众号（以下简称“微信公众号”）和通过其他方式（例如，通过社交媒体等）收集您的个人信息，请仔细阅读此政策。
 </p><p>您提供的个人信息可被视为受西蒙李家居当地零售的法人实体共同控制。</p>
@@ -179,8 +184,8 @@
 我们将针对新的技术、经营方式和客户需求，不断评估我们在隐私权方面的实务。随着我们对服务的提升及多元化，我们的隐私政策也可能发生变化。我们有权随时修改其隐私政策，并通过在此微信公众号发布政策的更新版本的方式通知您。修订后的隐私政策将适用于双方之间，无论我们是否已经向您发送有关变更的具体通知。请定期查看此微信公众号，或按照上述第2条的联络方式与我们取得联系，以了解隐私政策的更新情况。
      
      </p>
-     </div>
      <a href="javascript:;" class="btn btn-primary mt20 close-popup">关闭</a>
+     </div>
   </div>
 </div>
 <script src="./weui/lib/jquery-2.1.4.js"></script>
@@ -193,6 +198,13 @@
 <script src="./js/common.js"></script>
 
 <script>
+
+	function gd(){
+		 var top = $("#gdqy").offset().top; //获取某个元素距顶部的距离
+		 var ws=$("#gdqy").scrollTop();
+		 $("#gdqy").animate({scrollTop:(top+ws-60)+"px"},500);//页面滚动到指定高度 
+		
+	}
 	//定义flag发送验证码
 	var mobileCode = 1;
 	
