@@ -69,6 +69,12 @@ public class Utils {
 		         json.put("Birthday__c", DateUtils.datetoStr(user.getBirthday(), "yyyy-MM-dd"));//生日
 		    }
 		    
+		    
+		    if(user.getOpenid() != null && !"".equals(user.getOpenid())){
+		         json.put("OpenId__c", user.getOpenid());//姓名
+		    }
+		    		    
+		    
 		    //json.put("PhoneNumber__c", user.getMobile());
 		    String moblie =user.getMobile();
 		    
