@@ -95,30 +95,45 @@ public class Utils {
 			if(jsonArray!=null&&jsonArray.length()>0) {
 				
 				JSONObject obj = jsonArray.getJSONObject(0);
-				
-				String Birthday__c = obj.getString("Birthday__c");
-				
-				String City__c = obj.getString("City__c");
-				
-				String Province__c = obj.getString("Province__c");
+
+
+				String Birthday__c = null;
+				if(!obj.isNull("Birthday__c")){
+					Birthday__c = obj.getString("Birthday__c");
+				}
+
+
+				String City__c = null;
+				if(!obj.isNull("City__c")){
+					City__c = obj.getString("City__c");
+				}
+
+				String Province__c = null;
+				if(!obj.isNull("Province__c")){
+					Province__c = obj.getString("Province__c");
+				}
 				
 				if(City__c!=null&&Province__c!=null) {
 					
 					user.setCity(CountryMap.getProvinceCodeMap(Province__c)+","+CountryMap.getCityCodeMap(City__c));
 					
 				}
+
+				if(!obj.isNull("Name")){
+					user.setName(obj.getString("Name"));
+				}
+
+				String Gender__c = null;
+				if(!obj.isNull("Gender__c")){
+					Gender__c = obj.getString("Gender__c");
+				}
+
 				
-				String name = obj.getString("name");
-				
-				user.setName(name);
-				
-				String Gender__c = obj.getString("Gender__c");
-				
-				if(Gender__c.equals("男")) {
+				if(null != Gender__c && Gender__c.equals("男")) {
 					
 					user.setSex("1");
 					
-				}else if(Gender__c.equals("女")){
+				}else if(null != Gender__c && Gender__c.equals("女")){
 					
 					user.setSex("2");
 				}
