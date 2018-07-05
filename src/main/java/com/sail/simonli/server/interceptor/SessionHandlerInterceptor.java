@@ -10,7 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.sail.simonli.server.model.UserInfo;
 import com.sail.simonli.server.weixinapi.entity.Response;
 
-public class SessionHandlerInterceptor implements HandlerInterceptor{
+public class SessionHandlerInterceptor implements HandlerInterceptor{//主要是判断是否重新获取OPENID
 	
 	private Logger logger=Logger.getLogger(SessionHandlerInterceptor.class);
 

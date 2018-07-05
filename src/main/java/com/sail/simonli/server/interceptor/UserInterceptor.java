@@ -74,11 +74,16 @@ public class UserInterceptor extends HandlerInterceptorAdapter {
 
 						// 如果还在cookie有效期之内，继续判断是否可以自动登录
 						if (currentTime.before(savedValidtime)) {
-							if (userService == null) {//解决service为null无法注入问题 
-								userService=getBean(UserService.class,request);
+							 if (userService == null) {//解决service为null无法注入问题 
+							 	userService=getBean(UserService.class,request);
 						     } 
-							UserInfo u = userService.loadUserByMobile(usernameByCookie);
+							
+							UserInfo u = userService.loadUserByMobile(usernameByCookie); //如果cookie有，也要从SF中获取。
+							
 							if (u != null) {
+								
+								 userService.saveSf(request, u);
+								
 								Calendar calendar = Calendar.getInstance();
 								calendar.setTime(pLogins.getValidtime());
 								// 精确到分的时间字符串
