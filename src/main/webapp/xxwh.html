@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>资料完善</title>
+    <title>Simon Li 西蒙李家居</title>
     <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
@@ -13,6 +13,7 @@
 	background-size:100% auto;
 	background-repeat:repeat-x;
 	margin:0 10px;
+	background-color:transparent;
 }
 
 .personTop{
@@ -36,20 +37,27 @@
     border: 3px solid #fff; overflow: hidden; 
    	margin:20px auto 5px;
 }
+
+ .yszctk{
+   background-color: #e47725;
+    height: 32px;
+    text-align: center;
+    padding-top: 8px;
+}
 </style>
 
   </head>
 
-  <body ontouchstart>
+  <body ontouchstart style="background-color:#fff">
 
     <header>
     	<div class="personTop">
     		<img class="headimg" src="http://wx.qlogo.cn/mmopen/zhK3MN44IcibtzxZibicddSyp4qVX3rTtfMZsXQwa5mArMmI4A44uJgQyevo9VhePyUbv6MwhsWTzrqttXsUdzJL0LcT5I9reGA/0" alt="会员头像缩略图">
-    		<p id="nickname">杨</p>
+    		<p id="nickname"></p>
     	</div>
     </header>
 		<div class="weui-cells form1 weui-cells_form" style="margin-top:-10px;position:absolute;top:168px;">
-		<form action="/user/save" id="registerForm" class="flex-box flex-col flex-col-stretch flex-between" style="min-height: 100vh;padding:0px 0px 10px;">
+		<form action="/user/save" id="registerForm" class="flex-box flex-col flex-col-stretch flex-between" style="min-height:400px;padding:0px;">
     	<input type="hidden" id="id" name="id">
         <input type="hidden" id="cityName" name="cityName">
         <input type="hidden" id="countryName" name="countryName">
@@ -112,19 +120,19 @@
 				 <input type="text" id="birthday" name="birthday" data-toggle='date' class="weui-input"/>
 			</div>
           </div>
-          <br>
-	        <div style="text-align:center">
+            </form>
+             <div style="text-align:center">
 			 <a href="javascript:;" id="sumbit" class="weui-btn weui-btn_mini weui-btn_warn" style="background-color:#de5626;font-size:14px">&nbsp;&nbsp;&nbsp;&nbsp;保存&nbsp;&nbsp;&nbsp;&nbsp;</a>
 			 </div>
-            </form>
         </div>
-		
 <script src="./weui/lib/jquery-2.1.4.js"></script>
 <script src="./weui/js/jquery-weui.js"></script>
 <script src="./weui/lib/fastclick.js"></script>
 <script src="./weui/js/city-picker.min.js"></script>
 <script src="./js/common.js"></script>
 <script>
+$.showLoading("数据加载中...");
+
   $(function() {
     FastClick.attach(document.body);
 	$("#city_picker").cityPicker({
@@ -166,9 +174,11 @@ $("#sumbit").click(function(){
 			})
 	});
   });
- 
+ 	
+  	  var currDate=CurentTime();
 	  $("#birthday").calendar({
         value: ['2018-06-12'],
+        maxDate:currDate,
         dateFormat: 'yyyy-mm-dd'  // 自定义格式的时候，不能通过 input 的value属性赋值 '2016年12月12日' 来定义初始值，这样会导致无法解析初始值而报错。只能通过js中设置 value 的形式来赋值，并且需要按标准形式赋值（yyyy-mm-dd 或者时间戳)
       });
       
@@ -201,14 +211,36 @@ $("#sumbit").click(function(){
     				}else{
     					$.alert(data.message);
     				}
+    				$.hideLoading();
     		    },
     		    error: function () {
     						$.hideLoading();
-    						$.alert('网络超时，请再次尝试失败后联系管理员');
     		    }
     		})
     	});
       
+      
+      function CurentTime()
+      { 
+          var now = new Date();
+         
+          var year = now.getFullYear();       //年
+          var month = now.getMonth() + 1;     //月
+          var day = now.getDate();            //日
+          var clock = year + "-";
+         
+          if(month < 10)
+              clock += "0";
+         
+          clock += month + "-";
+         
+          if(day < 10)
+              clock += "0";
+             
+          clock += day + " ";
+         
+          return(clock); 
+      } 
       
 </script>
   </body>
