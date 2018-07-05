@@ -127,7 +127,7 @@ public class UserController {
     			
     			loginService.register(userInfo, resp);
     			
-    			service.saveSf(req, user); //如果己有，就更新OPENID,如果没有，就更新手机号和OPENID
+    			service.saveSf(req, userInfo); //如果己有，就更新OPENID,如果没有，就更新手机号和OPENID
     			
     			session.setAttribute("user", userInfo);
     			
@@ -217,15 +217,20 @@ public class UserController {
     	result.setStatus("1");
     	try {
     		
-    		if(user.getName()!=null&&user.getCity()!=null&&user.getCountry()!=null&&user.getBirthday()!=null&&user.getSex()!=null) {
+    		 if(user.getName()!=null&&user.getCity()!=null&&user.getCountry()!=null&&user.getBirthday()!=null&&user.getSex()!=null) {
     			user.setFinish("1");
-    		}else {
+    		 }else {
     			user.setFinish("0");
-    		}
+    		 }
     		
-    		service.saveSf(req, user);
+    		 UserInfo userDB = service.selectByPrimaryKey(user.getId());
+    		 
+    		 user.setMobile(userDB.getMobile());
+    		 user.setOpenid(userDB.getOpenid());
+    		 
+    		 service.saveSf(req, user);
     		
-    		service.save(req,user);
+    		 service.save(req,user);
     		
     		
     	}catch(Exception e) {
