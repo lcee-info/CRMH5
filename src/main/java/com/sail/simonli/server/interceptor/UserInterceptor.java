@@ -82,7 +82,7 @@ public class UserInterceptor extends HandlerInterceptorAdapter {
 							
 							if (u != null) {
 								
-								 userService.saveSf(request, u);
+								 userService.save(request, u);
 								
 								Calendar calendar = Calendar.getInstance();
 								calendar.setTime(pLogins.getValidtime());
