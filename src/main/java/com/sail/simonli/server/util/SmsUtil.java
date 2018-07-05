@@ -8,6 +8,10 @@ import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import org.apache.log4j.Logger;
+
+import com.sail.simonli.server.service.UserService;
+
 public class SmsUtil {
 	  
 	  private static final String SNAME="dlshxm00";
@@ -15,7 +19,7 @@ public class SmsUtil {
 	  private static final String SPRDID="1012818";
 	  private static final String smsUrl="http://cf.51welink.com/submitdata/Service.asmx/g_Submit";
 	  
-		
+	  private static Logger logger=Logger.getLogger(SmsUtil.class);	
 	
 	  public static String sendSms(String mobile,String content) throws UnsupportedEncodingException {
 		  String PostData = "sname="+SNAME+"&spwd="+SPWD+"&scorpid=&sprdid="+SPRDID+"&sdst="+mobile+"&smsg="+java.net.URLEncoder.encode(content,"utf-8");
@@ -40,8 +44,10 @@ public class SmsUtil {
 	            out.close();
 
 	            //获取响应状态
+	            logger.error("send sms ResponseCode:" +  conn.getResponseCode());
 	            if (conn.getResponseCode() != HttpURLConnection.HTTP_OK) {
 	                System.out.println("connect failed!");
+	                logger.error("send sms error: connect failed " );
 	                return "";
 	            }
 	            //获取响应内容体
@@ -52,9 +58,11 @@ public class SmsUtil {
 	            }
 	            in.close();
 	            return result;
-	        } catch (IOException e) {
+	        } catch (Exception e) {
 	            e.printStackTrace(System.out);
+	            logger.error("send sms error:", e.fillInStackTrace());
 	        }
+	        
 	        return "";
 	    }
 
