@@ -109,7 +109,7 @@ public class UserController {
 				 
 			}
     		
-    		UserInfo user = service.loadUserByMobile(mobile);
+    		UserInfo user = service.loadUserByMobileFromDB(mobile);//从本地DB中加数据    		
     		
     		if(user==null) {
     			
@@ -127,7 +127,7 @@ public class UserController {
     			
     			loginService.register(userInfo, resp);
     			
-    			service.saveSf(req, user);
+    			service.saveSf(req, user); //如果己有，就更新OPENID,如果没有，就更新手机号和OPENID
     			
     			session.setAttribute("user", userInfo);
     			

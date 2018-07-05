@@ -16,15 +16,31 @@ import com.sail.simonli.server.model.UserInfo;
 @Transactional
 public class UserService {
 	
-	private Logger logger=Logger.getLogger(UserService.class);
-    @Autowired
+   private Logger logger=Logger.getLogger(UserService.class);
+   @Autowired
    UserInfoMapper mapper;
+   
+   
+	   public UserInfo loadUserByMobileFromDB(String s) {//从本地数据库拉用户。	 
+	   	
+	   	   UserInfo user = mapper.loadUserByMobile(s); //从本地数据库拉用户。	   		      
+	       return user;
+	   }
+	   
+	   public UserInfo loadUserByMobileFromSF(String s) {//从SF中获取用户
+	    	
+		        UserInfo user = new  UserInfo();
+		        user.setMobile(s);	    	    		
+	    		Utils.query(user);
+
+  	            return user;
+	    }
  
     public UserInfo loadUserByMobile(String s) {
     	
-    	UserInfo user = mapper.loadUserByMobile(s);
+    	UserInfo user = mapper.loadUserByMobile(s); //从本地数据库拉用户。
     	
-    	if(user!=null) {
+    	if(user!=null) {//如果本地有，从SF中拉取最新的。
     		
     		Utils.query(user);
     		
@@ -35,9 +51,9 @@ public class UserService {
     
     public UserInfo loadUserByOpenid(String openid) {
     	
-    	UserInfo user = mapper.loadUserByOpenid(openid);
+    	UserInfo user = mapper.loadUserByOpenid(openid); //通过OPENID从本地获取用户。
     	
-    	if(user!=null) {
+    	if(user!=null) {//如果有，再从SF中加载
 
     		Utils.query(user);
     		

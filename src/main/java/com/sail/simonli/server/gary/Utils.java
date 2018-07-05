@@ -35,8 +35,7 @@ public class Utils {
 	  	    
 	  	    if(sex != null && !"".equals(sex)){
 		        json.put("Gender__c", sex.equals("1")?"男":"女"); //
-	  	    }
-		    
+	  	    }		    
 		    
 		    /**
 		     * 省市需要处理？？？？？？？？？
@@ -96,7 +95,8 @@ public class Utils {
 				
 				JSONObject obj = jsonArray.getJSONObject(0);
 
-
+				user.setRemark("1"); //表示SF中有这个用户
+				
 				String Birthday__c = null;
 				if(!obj.isNull("Birthday__c")){
 					Birthday__c = obj.getString("Birthday__c");
