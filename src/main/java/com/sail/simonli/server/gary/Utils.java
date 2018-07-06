@@ -118,8 +118,13 @@ public class Utils {
 					Province__c = obj.getString("Province__c");
 				}
 				
-				if(City__c!=null&&Province__c!=null) {				
-					user.setCity(CountryMap.getProvinceCodeMap(Province__c)+","+CountryMap.getCityCodeMap(City__c));					
+				if(City__c!=null&&Province__c!=null) {								
+					
+					String province_code=CountryMap.getProvinceCodeMap(Province__c);
+					String city_code=CountryMap.getCityCodeMap(City__c);
+					user.setCity(CountryMap.getProvinceCodeMap(Province__c)+","+CountryMap.getCityCodeMap(City__c));
+					user.setCityName(CountryMap.getCityNameMap(province_code)+","+CountryMap.getCityNameMap(city_code));
+
 				}
 
 				if(!obj.isNull("Name")){
