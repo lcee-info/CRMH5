@@ -80,9 +80,7 @@ public class UserInterceptor extends HandlerInterceptorAdapter {
 							
 							UserInfo u = userService.loadUserByMobile(usernameByCookie); //如果cookie有，也要从SF中获取。
 							
-							if (u != null) {
-								
-								 userService.save(request, u);
+							if (u != null) {							
 								
 								Calendar calendar = Calendar.getInstance();
 								calendar.setTime(pLogins.getValidtime());

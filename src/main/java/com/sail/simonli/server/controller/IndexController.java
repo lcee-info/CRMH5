@@ -29,12 +29,12 @@ public class IndexController {
 				
 				if("1".equals(user.getFinish())) {
 					
-					resp.sendRedirect("grxx.html");
+					resp.sendRedirect("grxx.html"); //个人主页
 					
 				}else {
 					
-					resp.sendRedirect("xxwh.html");
-					
+				//	resp.sendRedirect("xxwh.html");//个人信息维护		
+					resp.sendRedirect("grxx.html"); //个人主页
 				}
 				
 				return ;

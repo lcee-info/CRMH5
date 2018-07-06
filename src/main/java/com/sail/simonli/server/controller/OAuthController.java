@@ -121,8 +121,7 @@ public class OAuthController {
 					UserInfo user = service.loadUserByOpenid(openid);//如果COOKIE没有，重新获取OPENID
 					
 					if(user != null) {//表示本地己有，要从SF中更新一下本地。
-						
-						service.save(req, user);// 从SF中获取最新的用户信息，并更新到－－本地DB中。
+											
 						req.getSession().setAttribute("user", user);
 			    			
 					} else {

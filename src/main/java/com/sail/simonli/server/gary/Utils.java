@@ -85,7 +85,7 @@ public class Utils {
 		
 		public static UserInfo query(UserInfo user) {//查询
 			
-			String sql = "select+Id,name,Province__c,City__c,CustomerName__c,Birthday__c,Gender__c+from+Account+where+PhoneNumber__c='"+user.getMobile()+"'";
+			String sql = "select+Id,name,Country__c,Province__c,City__c,CustomerName__c,Birthday__c,Gender__c+from+Account+where+PhoneNumber__c='"+user.getMobile()+"'";
 
 			JSONArray jsonArray=SFDCDataCtrlUtil.getForSFDCData(sql);
 			
@@ -102,7 +102,12 @@ public class Utils {
 					Birthday__c = obj.getString("Birthday__c");
 				}
 
-
+				String Country__c = null;
+				if(!obj.isNull("Country__c")){
+					Country__c = obj.getString("Country__c");					
+					user.setCountryName(Country__c);
+				}
+				
 				String City__c = null;
 				if(!obj.isNull("City__c")){
 					City__c = obj.getString("City__c");
@@ -113,10 +118,8 @@ public class Utils {
 					Province__c = obj.getString("Province__c");
 				}
 				
-				if(City__c!=null&&Province__c!=null) {
-					
-					user.setCity(CountryMap.getProvinceCodeMap(Province__c)+","+CountryMap.getCityCodeMap(City__c));
-					
+				if(City__c!=null&&Province__c!=null) {				
+					user.setCity(CountryMap.getProvinceCodeMap(Province__c)+","+CountryMap.getCityCodeMap(City__c));					
 				}
 
 				if(!obj.isNull("Name")){
