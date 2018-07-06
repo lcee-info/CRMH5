@@ -43,16 +43,13 @@ public class Utils {
 		     */
 		    String provinceCode="",cityCode="";
 		    String  city = user.getCity();
-		    if(!city.isEmpty()) {
-		    	
-		    	String[] province = city.split(",");
-		    	
-		    	provinceCode=province[0];
-		    	
-		    	cityCode=province[1];
-		    }
-		    
+
 		    if(city != null && !"".equals(city)){
+				String[] province = city.split(",");
+
+				provinceCode=province[0];
+
+				cityCode=province[1];
 		    
 				json.put("Province__c", CountryMap.getProvinceMap(provinceCode)); //省
 				    
