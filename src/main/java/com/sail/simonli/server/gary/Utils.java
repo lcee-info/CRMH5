@@ -106,6 +106,7 @@ public class Utils {
 				if(!obj.isNull("Country__c")){
 					Country__c = obj.getString("Country__c");					
 					user.setCountryName(Country__c);
+					user.setCountry(Country__c);
 				}
 				
 				String City__c = null;
