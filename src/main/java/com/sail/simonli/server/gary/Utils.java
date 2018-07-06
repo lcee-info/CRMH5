@@ -4,6 +4,7 @@
 package com.sail.simonli.server.gary;
 
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -53,17 +54,19 @@ public class Utils {
 		    
 		    if(city != null && !"".equals(city)){
 		    
-				    json.put("Province__c", CountryMap.getProvinceMap(provinceCode)); //省
+				json.put("Province__c", CountryMap.getProvinceMap(provinceCode)); //省
 				    
-				    json.put("City__c",CountryMap.getCityMap(cityCode)); //市
+				json.put("City__c",CountryMap.getCityMap(cityCode)); //市
 		    }
 		    
 		   // json.put("CustomerName__c", user.getName());//姓名
 		    
 		    if(user.getName() != null && !"".equals(user.getName())){
-		         json.put("Name", user.getName());//姓名
+		        json.put("Name", user.getName());//姓名
+		    }else{
+		    	json.put("Name", "匿名"+ DateUtils.datetoStr(new Date(), "yyyyMMddHHmmss"));//姓名
 		    }
-		    
+		   
 		    if(user.getBirthday() != null ){
 		         json.put("Birthday__c", DateUtils.datetoStr(user.getBirthday(), "yyyy-MM-dd"));//生日
 		    }
