@@ -49,6 +49,9 @@
     text-align: center;
     padding-top: 8px;
 }
+#titleName:before{
+	border-top:0px;
+}
 </style>
 
   </head>
@@ -58,10 +61,10 @@
     <header>
     	<div class="personTop">
     		<img class="headimg" src="http://wx.qlogo.cn/mmopen/zhK3MN44IcibtzxZibicddSyp4qVX3rTtfMZsXQwa5mArMmI4A44uJgQyevo9VhePyUbv6MwhsWTzrqttXsUdzJL0LcT5I9reGA/0" alt="会员头像缩略图">
-    		<p id="nickname"></p>
+    		<p style="color:#fFCECC" id="nickname"></p>
     	</div>
     </header>
-		<div id="formdiv" class="weui-cells form1 weui-cells_form" style="margin-top:-10px;position:absolute;top:168px;">
+		<div id="formdiv" class="weui-cells form1 weui-cells_form" style="margin-top:-10px;position:absolute;top:168px;width:95%">
 		<form action="/user/save" id="registerForm" class="flex-box flex-col flex-col-stretch flex-between" style="min-height:400px;padding:0px">
     	<input type="hidden" id="id" name="id">
         <input type="hidden" id="cityName" name="cityName">
@@ -70,65 +73,68 @@
         
 		  <div style="height:35px">
 		  </div>
-          <div class="weui-cell">
-		   <div class="weui-cell__hd"><img src="./images/2-1.png" alt="" style="width:22px;margin-right:5px;display:block"></div>
+          <div id="titleName" class="weui-cell" style="height:55px;border-top:0px">
+		   <div class="weui-cell__hd"><img src="./images/1.png" alt="" style="width:28px;margin-right:10px;display:block"></div>
 		   <div class="weui-cell__hd">
 			 <label class="weui-label">姓名</label>
 		   </div>
-			<div class="weui-cell__bd">
-				<input class="weui-input" type="text" readOnly name="name" id="name" placeholder="请输入姓名">
+			<div class="weui-cell__bd" style="text-align:right">
+				<span id="name"></span>
 			</div>
           </div>
-		   <div class="weui-cell">
+          <div class="weui-cell" style="height:55px">
+		   <div class="weui-cell__hd"><img src="./images/2.png" alt="" style="width:22px;margin-left:3px;margin-right:13px;display:block"></div>
 		   <div class="weui-cell__hd">
-		   <img src="./images/2-2.png" alt="" style="width:22px;margin-right:5px;display:block"></div>
-		   <div class="weui-cell__hd">
-			 <label class="weui-label">性别</label>
+			 <label class="weui-label">电话</label>
 		   </div>
-			<div class="weui-cell__bd">
-				<select class="weui-select" name="sex" id="sex" disabled>
-				<option value="">请选择</option>
-                <option value="1">男</option>
-                <option value="2">女</option> 
-            </select>
+			<div class="weui-cell__bd" style="text-align:right">
+				<span id="mobile"></span>
 			</div>
           </div>
-		   <div class="weui-cell">
+          <div class="weui-cell" style="height:55px">
 		   <div class="weui-cell__hd">
-		   <img src="./images/2-3.png" alt="" style="width:22px;margin-right:5px;display:block"></div>
-		   <div class="weui-cell__hd">
-			 <label class="weui-label">国家</label>
-		   </div>
-			<div class="weui-cell__bd">
-				<select class="weui-select" name="country" id="country" disabled>
-                <option selected value="中国">中国</option>
-            </select>
-			</div>
-          </div>
-		  <div class="weui-cell">
-		   <div class="weui-cell__hd">
-		   <img src="./images/2-4.png" alt="" style="width:22px;margin-right:5px;display:block"></div>
-		   <div class="weui-cell__hd">
-			 <label class="weui-label">城市</label>
-		   </div>
-			<div class="weui-cell__bd">
-				<input type="text" id='city_picker' readOnly class="weui-input"/>
-			</div>
-          </div>
-		  <div class="weui-cell">
-		   <div class="weui-cell__hd">
-		   <img src="./images/2-5.png" alt="" style="width:22px;margin-right:5px;display:block"></div>
+		   <img src="./images/6.png" alt="" style="width:28px;margin-right:10px;display:block"></div>
 		   <div class="weui-cell__hd">
 			 <label class="weui-label">生日</label>
 		   </div>
-			<div class="weui-cell__bd">
-				 <input type="text" id="birthday" name="birthday" readOnly  class="weui-input"/>
+		   <div class="weui-cell__bd" style="text-align:right">
+				<span id="birthday"></span>
+			</div>
+          </div>
+		   <div class="weui-cell" style="height:55px">
+		   <div class="weui-cell__hd">
+		   <img src="./images/3.png" alt="" style="width:28px;margin-right:10px;display:block"></div>
+		   <div class="weui-cell__hd">
+			 <label class="weui-label">性别</label>
+		   </div>
+			<div class="weui-cell__bd" style="text-align:right">
+				<span id="sex"></span>
+			</div>
+          </div>
+		   <div class="weui-cell" style="height:55px">
+		   <div class="weui-cell__hd">
+		   <img src="./images/4.png" alt="" style="width:28px;margin-right:10px;display:block"></div>
+		   <div class="weui-cell__hd">
+			 <label class="weui-label">国家</label>
+		   </div>
+			<div class="weui-cell__bd" style="text-align:right">
+				<span>中国</span>
+			</div>
+          </div>
+		  <div class="weui-cell" style="height:55px">
+		   <div class="weui-cell__hd">
+		   <img src="./images/5.png" alt="" style="width:28px;margin-right:5px;display:block"></div>
+		   <div class="weui-cell__hd">
+			 <label class="weui-label">城市</label>
+		   </div>
+		   <div class="weui-cell__bd" style="text-align:right">
+				<span id='city_picker' ></span>
 			</div>
           </div>
           <br>
             </form>
-             <div style="text-align:center">
-			  <a href="xxwh.html" class="weui-btn weui-btn_mini weui-btn_warn" id="button_1" style="background-color:#de5626;font-size:14px">点击完善资料</a>
+             <div style="text-align:center;margin-top:30px">
+			  <a href="xxwh.html" class="weui-btn weui-btn_mini weui-btn_warn" id="button_1" style="background-color:#de5626;font-size:14px;border-radius:0px">点击完善资料</a>
 			 </div>
 			  <div style="text-align:center">
 			 <a href="ys.html" class="weui-footer__link open-popup" >点击查看隐私政策条款</a>
@@ -202,13 +208,13 @@ $("#sumbit").click(function(){
     				if(data.status){
     					 var user = data.data;
     					 $("#id").val(user.id);
-    					 $("#name").val(user.name);
-    					 $("#mobile").val(user.mobile);
-    					 $("#birthday").val(user.birthday);
-    					 $("#sex").val(user.sex);
+    					 $("#name").text(user.name);
+    					 $("#mobile").text(user.mobile);
+    					 $("#birthday").text(user.birthday);
+    					 $("#sex").text(user.sex=='1'?'男':'女');
     					// $("#country").val(user.country);
     					// $("#countryName").val(user.countryName);
-    					 $("#city_picker").val(user.cityName);
+    					 $("#city_picker").text(user.cityName);
     					 $("#city").val(user.city);
     					 $("#cityName").val(user.cityName);
     					 //$(".personTop").css("background-image","url(http://wx.qlogo.cn/mmopen/zhK3MN44IcibtzxZibicddSyp4qVX3rTtfMZsXQwa5mArMmI4A44uJgQyevo9VhePyUbv6MwhsWTzrqttXsUdzJL0LcT5I9reGA/0)");

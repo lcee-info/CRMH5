@@ -110,7 +110,7 @@
 					</div> 
 					<div class="inp-block flex-box"  >
 						<i class="ico-mobile block" ></i> 
-						<input type="tel" id="mobile" style="color:#fff;"  class="flex-grow-1" placeholder="请输入您的手机号" name="mobile">
+						<input type="tel" id="mobile" style="color:#FFF;opacity:0.7"  class="flex-grow-1" placeholder="请输入您的手机号" name="mobile">
 					</div>
 
 				<!-- 	<div class="mt10 flex-box flex-col-stretch">
@@ -124,16 +124,18 @@
 
 					<div class="mt20 inp-block flex-box" style="padding-right:0px">
 						<i class="ico-password block"></i>
-						<input type="text" id="smsCode" style="color:#fff;" class="flex-grow-1" placeholder="请输入您的短信验证码" name="smsCode">
+						<input type="text" id="smsCode" style="color:#FFF;opacity:0.7" class="flex-grow-1" placeholder="请输入您的短信验证码" name="smsCode">
 						<a href="javascript:;" style="color:#de5526;padding:10px;background-color:#ffffff;opacity:0.5" class="flex-grow-0 col6" id="sms_send">获取验证码</a>
 						<!--  <a href="javascript:;" class="flex-grow-0 col9">56s后重新获取</a>-->
 					</div>
 
 					<a href="javascript:;"   class="btn btn-primary mt20" id="registerBtn">注　册</a>
- 					<p class="weui-footer__links mt20" style="color:#fff">
-			      	<input type="checkbox" checked id="liys" style="margin-top:5px;color:#de5526;" >
-			        <a href="ys.html" style="text-decoration:underline;" class="weui-footer__link open-popup" >您已阅读并接受Simon Li的隐私政策条款</a>
-			      	</p>
+ 					 <label for="weuiAgree" class="weui-agree">
+				            <input id="weuiAgree" type="checkbox" checked  class="weui-agree__checkbox">
+				            <span class="weui-agree__text">
+				              	<a href="ys.html" style="text-decoration:underline;color:#fff"   >您已阅读并接受Simon Li的隐私政策条款</a>
+				            </span>
+				        </label>
 				</div>
 			</form>
 		</section>
@@ -181,29 +183,37 @@
 	};
 	
 	$("#sms_send").click(function(){
-		var mobile = $("#mobile").val().trim();
-		
-		if(mobile == "" || mobile == null){
-			$.toast("请输入您的手机号码","text");
-			$("#mobile").focus();
-			return false;
+		try{
+			$("#sms_send").attr("disabled",true);
+			var mobile = $("#mobile").val().trim();
+			
+			if(mobile == "" || mobile == null){
+				$.toast("请输入您的手机号码","text");
+				$("#mobile").focus();
+				$("#sms_send").attr("disabled",false);
+				return false;
+			}
+			
+			if(!checkTel(mobile)){
+				$.toast("电话号码格式不正确","text");
+				$("#mobile").focus();
+				$("#sms_send").attr("disabled",false);
+				return false;
+			}
+			
+			$.get(serverPath+"/user/sendSms/"+mobile, function(result){
+				countDownSendButton($("#sms_send"),120);
+			  });
+		}catch(e){
+			$("#sms_send").attr("disabled",false);
 		}
 		
-		if(!checkTel(mobile)){
-			$.toast("电话号码格式不正确","text");
-			$("#mobile").focus();
-			return false;
-		}
-		
-		$.get(serverPath+"/user/sendSms/"+mobile, function(result){
-			countDownSendButton($("#sms_send"),120);
-		  });
 		
 	});
 
 	$("#registerBtn").click(function(){
 		
-		if(!$("#liys").is(":checked")){
+		if(!$("#weuiAgree").is(":checked")){
 			return false;
 		}
 		
