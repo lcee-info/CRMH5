@@ -234,6 +234,8 @@ body,
   border: 1px solid #d9d9d9;
   border-radius: 1px;
   padding: 0 10px;
+  margin-left:15px;
+  margin-right:15px;
 }
 .inp-block input,
 .inp-block select,
@@ -388,6 +390,8 @@ body,
   border: 1px solid #ff6633;
   background-color: #ff6633;
   color: #fff;
+  margin-left:15px;
+  margin-right:15px;
 }
 .btn.btn-outlined {
   color: #ff6633;

@@ -75,6 +75,9 @@
     overflow: hidden;
     color:#fff;
  }
+ .weui-dialog, .weui-toast{
+ 	top:50%;
+ }
 	 
    .weui-dialog__bd{
    min-height:20px;
@@ -212,6 +215,12 @@
 	});
 
 	$("#registerBtn").click(function(){
+		$.modal({
+	          id: "model_1",
+	          title: "注册成功!",
+	          text: '<br><br><span>快来完善资料，发现更多惊喜</span><br><br><a href="xxwh.html" class="weui-btn weui-btn_warn" style="background-color:#dd5625">现在就去</a><br><a href="grxx.html" style="background-color:#de9864" class="weui-btn weui-btn_warn">以后再说</a><br><br>',
+	        });
+		return;
 		
 		if(!$("#weuiAgree").is(":checked")){
 			return false;
