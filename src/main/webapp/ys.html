@@ -39,8 +39,8 @@
 	     	 = 隐私政策条款 =
 	     </div>
      </div>
-     <div id="gdqy" style="position:fixed; top:100px;bottom:0px;margin:5px 0px;background:#fff;padding:0 10px 0 10px;width: 100%;overflow-y: scroll; ">
-     	<div style="position:fixed;text-align:center; top:230px;right:10px;z-index:9999;width:32px;background:#F9D5CB; " onclick="gd()">
+     <div id="gdqy" style="position:fixed; top:100px;bottom:0px;margin:5px 0px;background:#fff;padding:0 10px 0 10px;width: 100%;overflow-y: scroll; " >
+     	<div id="gdbutton" style="position:fixed;text-align:center; top:230px;right:10px;z-index:9999;width:32px;background:#F9D5CB; "  onclick="gd()">
      		<img alt="" src="./images/xl.png" style="width:10px;margin:0 auto;">
      		<p style="font-size:xx-small;color:#fff">下滑</p>
      	</div>
@@ -93,6 +93,33 @@
 <script src="./js/common.js"></script>
 
 <script>
+document.addEventListener('touchstart',touch, false);
+document.addEventListener('touchmove',touch, false);
+document.addEventListener('touchend',touch, false);
+function touch (event){
+		var event = event || window.event;
+		
+		var oInp = document.getElementById("inp");
+ 
+		switch(event.type){
+			case "touchstart":
+				$("#gdbutton").hide();
+				break;
+			case "touchend":
+				$("#gdbutton").show();
+				break;
+			case "touchmove":
+				$("#gdbutton").hide();
+				break;
+		}
+		
+	}
+
+
+	
+	function mouseup(){
+		$("#gdbutton").show();
+	}
 
 	function gd(){
 		 var top = $("#gdqy").offset().top; //获取某个元素距顶部的距离
