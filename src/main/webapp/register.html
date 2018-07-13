@@ -159,14 +159,7 @@
 <script src="./js/common.js"></script>
 
 <script>
-	document.getElementById("weuiAgree").bgColor='#000';
-	
-	function gd(){
-		 var top = $("#gdqy").offset().top; //获取某个元素距顶部的距离
-		 var ws=$("#gdqy").scrollTop();
-		 $("#gdqy").animate({scrollTop:(top+ws-60)+"px"},500);//页面滚动到指定高度 
-		
-	}
+ 
 	//定义flag发送验证码
 	var mobileCode = 1;
 	
@@ -222,6 +215,7 @@
 	$("#registerBtn").click(function(){
  
 		if(!$("#weuiAgree").is(":checked")){
+			$.toast("请接受隐私政策条款后进行注册","text");
 			return false;
 		}
 		
