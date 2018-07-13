@@ -10,7 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.sail.simonli.server.model.UserInfo;
 import com.sail.simonli.server.weixinapi.entity.Response;
 
-public class SessionHandlerInterceptor implements HandlerInterceptor{//主要是判断是否重新获取OPENID
+public class SessionHandlerInterceptor implements HandlerInterceptor{
 	
 	private Logger logger=Logger.getLogger(SessionHandlerInterceptor.class);
 
@@ -31,7 +31,7 @@ public class SessionHandlerInterceptor implements HandlerInterceptor{//主要是
 			
 			logger.info("callback:"+callback+";-----request.getContextPath():"+request.getContextPath());
 			
-			if(callback.indexOf("/register")!=-1||callback.indexOf("/500.html")!=-1||callback.indexOf("/oauth")!=-1) {
+			if(callback.indexOf("/user/sendSms")!=-1||callback.indexOf("/register")!=-1||callback.indexOf("/500.html")!=-1||callback.indexOf("/oauth")!=-1) {
 			
 				return true;
 				
