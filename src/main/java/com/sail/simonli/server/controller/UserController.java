@@ -203,8 +203,10 @@ public class UserController {
     	
     	user = service.loadUserByMobile(user.getMobile());
     	
-    	service.save(req, user);// 从SF中获取最新的用户信息，并更新到－－本地DB中。
     	
+    	if(user != null && user.getId() != null && !"".equals(user.getId())){
+    	    service.save(req, user);// 从SF中获取最新的用户信息，并更新到－－本地DB中。
+    	}
     	result.setData(user);
     	
     	return result;
