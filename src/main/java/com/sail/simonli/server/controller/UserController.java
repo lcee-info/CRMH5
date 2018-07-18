@@ -165,7 +165,7 @@ public class UserController {
     	
     	result.setStatus("1");
     	
-        String msgcontent="验证码：{rad}。请勿泄露该验证码。【Simonli】";
+        String msgcontent="验证码：{rad}。请勿泄露该验证码。【西蒙李家居】";
         
 		String rad=CommUtil.getRandNum(6);
 		

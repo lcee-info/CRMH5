@@ -63,68 +63,70 @@
     </header>
 		<div class="form1 weui-cells_form" style="margin-top:-10px;position:absolute;top:168px;width:95%">
 		<form action="/user/save" id="registerForm" class="flex-box flex-col flex-col-stretch flex-between" style="min-height:400px;padding:0px;">
-    	<input type="hidden" id="id" name="id">
-        <input type="hidden" id="cityName" name="cityName">
-        <input type="hidden" id="countryName" name="countryName">
-        <input type="hidden" id="city" name="city">
-        
-		  <div style="height:35px">
-		  </div>
-          <div id="titleName" class="weui-cell" style="height:40px">
-		   <div class="weui-cell__hd"><img src="./images/2-1.png" alt="" style="width:22px;margin-right:5px;display:block"></div>
-		   <div class="weui-cell__hd">
-			 <label class="weui-label">姓名</label>
-		   </div>
-			<div class="weui-cell__bd">
-				<input class="weui-input" type="text" name="name" id="name" placeholder="请输入姓名">
-			</div>
-          </div>
-		   <div class="weui-cell" style="height:40px">
-		   <div class="weui-cell__hd">
-		   <img src="./images/2-2.png" alt="" style="width:22px;margin-right:5px;display:block"></div>
-		   <div class="weui-cell__hd">
-			 <label class="weui-label">性别</label>
-		   </div>
-			<div class="weui-cell__bd">
-				<select class="weui-select" name="sex" id="sex">
-				<option value="">请选择</option>
-                <option value="1">男</option>
-                <option value="2">女</option> 
-            </select>
-			</div>
-          </div>
-		   <div class="weui-cell" style="height:40px">
-		   <div class="weui-cell__hd">
-		   <img src="./images/2-3.png" alt="" style="width:22px;margin-right:5px;display:block"></div>
-		   <div class="weui-cell__hd">
-			 <label class="weui-label">国家</label>
-		   </div>
-			<div class="weui-cell__bd">
-				<select class="weui-select" name="country" id="country" readOnly>
-                <option selected value="中国">中国</option>
-            </select>
-			</div>
-          </div>
-		  <div class="weui-cell" style="height:40px">
-		   <div class="weui-cell__hd">
-		   <img src="./images/2-4.png" alt="" style="width:22px;margin-right:5px;display:block"></div>
-		   <div class="weui-cell__hd">
-			 <label class="weui-label">城市</label>
-		   </div>
-			<div class="weui-cell__bd">
-				<input type="text" id='city_picker' class="weui-input"/>
-			</div>
-          </div>
-		  <div class="weui-cell" style="height:40px">
-		   <div class="weui-cell__hd">
-		   <img src="./images/2-5.png" alt="" style="width:22px;margin-right:5px;display:block"></div>
-		   <div class="weui-cell__hd">
-			 <label class="weui-label">生日</label>
-		   </div>
-			<div class="weui-cell__bd">
-				 <input type="text" id="birthday" name="birthday" data-toggle='date' class="weui-input"/>
-			</div>
-          </div>
+		    	<input type="hidden" id="id" name="id">
+		        <input type="hidden" id="cityName" name="cityName">
+		        <input type="hidden" id="countryName" name="countryName">
+		        <input type="hidden" id="city" name="city">
+		        
+				  <div style="height:35px">
+				  </div>
+		          <div id="titleName" class="weui-cell" style="height:40px">
+				   <div class="weui-cell__hd"><img src="./images/2-1.png" alt="" style="width:22px;margin-right:5px;display:block"></div>
+				   <div class="weui-cell__hd">
+					 <label class="weui-label">姓名</label>
+				   </div>
+					<div class="weui-cell__bd">
+						<input class="weui-input" type="text" name="name" id="name" placeholder="请输入姓名">
+					</div>
+		          </div>
+				   <div class="weui-cell" style="height:40px">
+				   <div class="weui-cell__hd">
+				   <img src="./images/2-2.png" alt="" style="width:22px;margin-right:5px;display:block"></div>
+				   <div class="weui-cell__hd">
+					 <label class="weui-label">性别</label>
+				   </div>
+					<div class="weui-cell__bd">
+						<select class="weui-select" name="sex" id="sex">
+						<option value="">请选择</option>
+		                <option value="1">男</option>
+		                <option value="2">女</option> 
+		            </select>
+					</div>
+		          </div>
+		          
+		           <div class="weui-cell" style="height:40px">
+				   <div class="weui-cell__hd">
+				   <img src="./images/2-5.png" alt="" style="width:22px;margin-right:5px;display:block"></div>
+				   <div class="weui-cell__hd">
+					 <label class="weui-label">生日</label>
+				   </div>
+					<div class="weui-cell__bd">
+						 <input type="text" id="birthday" name="birthday" data-toggle='date' class="weui-input"/>
+					</div>
+		          </div>
+		          
+				   <div class="weui-cell" style="height:40px">
+				   <div class="weui-cell__hd">
+				   <img src="./images/2-4.png" alt="" style="width:22px;margin-right:5px;display:block"></div>
+				   <div class="weui-cell__hd">
+					 <label class="weui-label">国家</label>
+				   </div>
+					<div class="weui-cell__bd">
+						<select class="weui-select" name="country" id="country" readOnly>
+		                <option selected value="中国">中国</option>
+		            </select>
+					</div>
+		          </div>
+				  <div class="weui-cell" style="height:40px">
+				   <div class="weui-cell__hd">
+				   <img src="./images/2-3.png" alt="" style="width:22px;margin-right:5px;display:block"></div>
+				   <div class="weui-cell__hd">
+					 <label class="weui-label">城市</label>
+				   </div>
+					<div class="weui-cell__bd">
+						<input type="text" id='city_picker' class="weui-input"/>
+					</div>
+		          </div>		
             </form>
              <div style="text-align:center">
 			 <a href="javascript:;" id="sumbit" class="weui-btn weui-btn_mini weui-btn_warn" style="background-color:#de5626;font-size:14px;border-radius:0px">&nbsp;&nbsp;&nbsp;&nbsp;保存&nbsp;&nbsp;&nbsp;&nbsp;</a>
