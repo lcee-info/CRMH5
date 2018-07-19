@@ -30,7 +30,12 @@ public class Utils {
 			
 		    JSONObject json = new JSONObject();
 		    
-	  	    json.put("Country__c", "中国");
+		    String country = user.getCountryName();
+		    if(country == null || "".equals(country)){
+		    	 country = "中国";
+		    }
+		    
+	  	    json.put("Country__c", country);
 	  	    
 	  	    String sex = user.getSex();
 	  	    

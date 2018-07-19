@@ -115,9 +115,7 @@ body{
 					 <label class="weui-label">国家</label>
 				   </div>
 					<div class="weui-cell__bd">
-						<select class="weui-select" name="country" id="country" readOnly>
-		                <option selected value="中国">中国</option>
-		            </select>
+						<input class="weui-input" type="text" name="country" id="country" placeholder="请输入" value="中国">
 					</div>
 		          </div>
 				  <div class="weui-cell" style="height:40px">
@@ -205,7 +203,11 @@ $("#sumbit").click(function(){
     					 $("#mobile").val(user.mobile);
     					 $("#birthday").val(user.birthday);
     					 $("#sex").val(user.sex);
-    					// $("#country").val(user.country);
+    					 if(user.country){
+							  $("#country").val(user.country);
+						 }else{
+							 $("#country").val("中国");
+						 }
     					// $("#countryName").val(user.countryName);
     					 $("#city_picker").val(user.cityName);
     					 $("#city").val(user.city);

@@ -124,7 +124,7 @@ body{
 			 <label class="weui-label">国家</label>
 		   </div>
 			<div class="weui-cell__bd" style="text-align:right">
-				<span>中国</span>
+				<span id="country">中国</span>
 			</div>
           </div>
 		  <div class="weui-cell" style="height:50px">
@@ -218,7 +218,11 @@ $("#sumbit").click(function(){
     					 $("#mobile").text(user.mobile);
     					 $("#birthday").text(user.birthday);
     					 $("#sex").text(user.sex=='1'?'男':'女');
-    					// $("#country").val(user.country);
+						 if(user.country){
+							  $("#country").text(user.country);
+						 }else{
+							 $("#country").text("中国");
+						 }
     					// $("#countryName").val(user.countryName);
     					 $("#city_picker").text(user.cityName);
     					 $("#city").val(user.city);
