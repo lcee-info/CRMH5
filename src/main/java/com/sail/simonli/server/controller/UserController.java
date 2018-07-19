@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.WebRequest;
 
 import com.sail.simonli.server.gary.Utils;
+import com.sail.simonli.server.model.ErrorLog;
 import com.sail.simonli.server.model.UserInfo;
+import com.sail.simonli.server.service.ErrorLogService;
 import com.sail.simonli.server.service.LoginsService;
 import com.sail.simonli.server.service.UserService;
 import com.sail.simonli.server.util.CommUtil;
@@ -35,11 +37,13 @@ public class UserController {
 	private Logger logger=Logger.getLogger(UserController.class);
 	
 	@Autowired
-	private UserService service;
-	
+	private UserService service;	
 	
 	@Autowired
 	private LoginsService loginService;
+	
+	@Autowired
+	private ErrorLogService errorLogService;
 	
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public Result register(HttpServletRequest req, HttpServletResponse resp) {
@@ -173,16 +177,28 @@ public class UserController {
 		
     	try {
     		
-			SmsUtil.sendSms(mobile, msgcontent);
+			String smsResult = SmsUtil.sendSms(mobile, msgcontent);
+			
+			if(smsResult.indexOf("<State>0</State>") < 0){
+				 ErrorLog record = new ErrorLog();
+	    		 record.setApiName("短信接口");
+	    		 record.setErrorMsg(smsResult);
+	    		 record.setSolution("接口通，发送的内容被拦，请联系短信服务商");
+	    		 errorLogService.insertErrorLog(record );
+			}
 			
 			req.getSession().setAttribute("smscode"+mobile,rad);
 			
-		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		} catch (Exception e) {
 			
-			result.setStatus("0");
-			
+			 ErrorLog record = new ErrorLog();
+    		 record.setApiName("短信接口");
+    		 record.setErrorMsg(e.getMessage());
+    		 record.setSolution("接口调用不通，联系短信服务商");
+    		 errorLogService.insertErrorLog(record );
+    		
+			e.printStackTrace();			
+			result.setStatus("0");			
 			result.setMessage(e.getMessage());
 		}
     	

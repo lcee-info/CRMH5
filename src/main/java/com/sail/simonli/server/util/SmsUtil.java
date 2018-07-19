@@ -21,13 +21,15 @@ public class SmsUtil {
 	  
 	  private static Logger logger=Logger.getLogger(SmsUtil.class);	
 	
-	  public static String sendSms(String mobile,String content) throws UnsupportedEncodingException {
+	  public static String sendSms(String mobile,String content) throws Exception {
+		  
 		  String PostData = "sname="+SNAME+"&spwd="+SPWD+"&scorpid=&sprdid="+SPRDID+"&sdst="+mobile+"&smsg="+java.net.URLEncoder.encode(content,"utf-8");
+		
 		  return SMS(PostData,smsUrl);
 	  }
 	
-	  public static String SMS(String postData, String postUrl) {
-	        try {
+	  public static String SMS(String postData, String postUrl) throws Exception{
+	        
 	            //发送POST请求
 	            URL url = new URL(postUrl);
 	            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -58,12 +60,11 @@ public class SmsUtil {
 	            }
 	            in.close();
 	            return result;
-	        } catch (Exception e) {
-	            e.printStackTrace(System.out);
-	            logger.error("send sms error:", e.fillInStackTrace());
-	        }
+//	        } catch (Exception e) {
+//	            e.printStackTrace(System.out);
+//	            logger.error("send sms error:", e.fillInStackTrace());
+//	        }
 	        
-	        return "";
 	    }
 
 }
