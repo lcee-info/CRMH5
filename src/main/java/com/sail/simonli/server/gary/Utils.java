@@ -30,7 +30,7 @@ public class Utils {
 			
 		    JSONObject json = new JSONObject();
 		    
-		    String country = user.getCountryName();
+		    String country = user.getCountry();
 		    if(country == null || "".equals(country)){
 		    	 country = "中国";
 		    }
