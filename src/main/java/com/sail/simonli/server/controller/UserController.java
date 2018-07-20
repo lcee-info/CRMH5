@@ -250,6 +250,7 @@ public class UserController {
     		 
     		 service.saveSf(req, user);
     		
+    		 Thread.sleep(500);
     		 service.save(req,user);
     		
     		
