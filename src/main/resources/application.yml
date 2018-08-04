@@ -20,9 +20,9 @@ logging:
     root: INFO
     com.sail.simonli: DEBUG
 salesforce:
-  username: crm@trayton.com.develop01
-  password: demo1234
-  clientid: 3MVG99S6MzYiT5k9H2ZS9jfMygW.e8a4ONaI1A6.OEmGBs2b0NlBqpPZw90Sh2LROUuD5MeutZUFVv88OoLBX
+  username: crm@trayton.com
+  password: "!QAZ2wsx"
+  clientid: 3MVG9d8..z.hDcPInpf.0TD0NGk8seLsSHMDZ_dTiaQIN2LdQn0BlHWdzS_cVVPzNCMtaH8BJL8bM2eqjNj.x
   clientsecret: 5867733029077662500
   grantservice: /services/oauth2/token?grant_type=password
   loginurl: https://test.salesforce.com
