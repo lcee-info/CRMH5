@@ -104,7 +104,8 @@ body{
 					 <label class="weui-label">生日</label>
 				   </div>
 					<div class="weui-cell__bd">
-						 <input type="text" id="birthday" name="birthday" data-toggle='date' class="weui-input"/>
+						 <!-- <input type="text" id="birthday" name="birthday" data-toggle='date' class="weui-input"/> -->
+						 <input class="weui-input" type="text" id='datetime-picker'/>
 					</div>
 		          </div>
 		          
@@ -152,10 +153,15 @@ $.showLoading("数据加载中...");
     	}
 	});
 	
-$("#sumbit").click(function(){
+  $("#sumbit").click(function(){
 		
 		//提交表单
 		var registerForm = $("#registerForm");
+		    var birthday = $("#datetime-picker").val();
+		    if(birthday){
+		    	birthday = birthday.substring(0,10);
+		    	$("#datetime-picker").val(birthday);
+		    }		    
 			var data = registerForm.serialize(); //表单序列化
 			
 			$("#countryName").val($("#country").val());
@@ -201,7 +207,8 @@ $("#sumbit").click(function(){
     					 $("#id").val(user.id);
     					 $("#name").val(user.name);
     					 $("#mobile").val(user.mobile);
-    					 $("#birthday").val(user.birthday);
+    					 //$("#birthday").val(user.birthday);
+    					 initbirthday(user.birthday);
     					 $("#sex").val(user.sex);
     					 if(user.country){
 							  $("#country").val(user.country);
@@ -231,9 +238,18 @@ $("#sumbit").click(function(){
     		})
     	});
       
+       
+       function initbirthday(birthday){
+    	   
+    	    var birthday = birthday + " \n";
+    	    $("#datetime-picker").datetimePicker({
+                 times: function () {return [ { values: [] } ];},
+  			     value: birthday,
+  		         onChange: function (picker, values, displayValues) {}
+  		    });
+       }
       
-      function CurentTime()
-      { 
+      function CurentTime(){ 
           var now = new Date();
          
           var year = now.getFullYear();       //年
