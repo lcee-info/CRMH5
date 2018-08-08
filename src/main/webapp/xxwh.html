@@ -105,7 +105,7 @@ body{
 				   </div>
 					<div class="weui-cell__bd">
 						 <!-- <input type="text" id="birthday" name="birthday" data-toggle='date' class="weui-input"/> -->
-						 <input class="weui-input" type="text" id='datetime-picker'/>
+						 <input class="weui-input" type="text"  name="birthday" id='datetime-picker'/>
 					</div>
 		          </div>
 		          
@@ -156,12 +156,14 @@ $.showLoading("数据加载中...");
   $("#sumbit").click(function(){
 		
 		//提交表单
-		var registerForm = $("#registerForm");
 		    var birthday = $("#datetime-picker").val();
 		    if(birthday){
 		    	birthday = birthday.substring(0,10);
 		    	$("#datetime-picker").val(birthday);
-		    }		    
+		    }
+		    
+		    var registerForm = $("#registerForm");
+		   
 			var data = registerForm.serialize(); //表单序列化
 			
 			$("#countryName").val($("#country").val());
