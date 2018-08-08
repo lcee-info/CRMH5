@@ -1,11 +1,24 @@
 package com.sail.simonli.server.controller;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.WebRequest;
 
 import com.sail.simonli.server.gary.Utils;
@@ -19,15 +32,6 @@ import com.sail.simonli.server.util.Result;
 import com.sail.simonli.server.util.SmsUtil;
 import com.sail.simonli.server.util.StringUtil;
 import com.sail.simonli.server.weixinapi.entity.Response;
-
-import java.io.UnsupportedEncodingException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 @RestController
 @RequestMapping("/user")
@@ -44,6 +48,7 @@ public class UserController {
 	
 	@Autowired
 	private ErrorLogService errorLogService;
+	
 	
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public Result register(HttpServletRequest req, HttpServletResponse resp) {
@@ -130,6 +135,7 @@ public class UserController {
     			Utils.query(userInfo);
     			
     			loginService.register(userInfo, resp);
+    			
     			
     			service.saveSf(req, userInfo); //如果己有，就更新OPENID,如果没有，就更新手机号和OPENID
     			

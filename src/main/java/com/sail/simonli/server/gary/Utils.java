@@ -61,13 +61,14 @@ public class Utils {
 				json.put("City__c",CountryMap.getCityMap(cityCode)); //市
 		    }
 		    
-		   // json.put("CustomerName__c", user.getName());//姓名
 		    
-		    if(user.getName() != null && !"".equals(user.getName())){
-		        json.put("Name", user.getName());//姓名
-		    }else{
-		    	json.put("Name", "匿名"+ DateUtils.datetoStr(new Date(), "yyyyMMddHHmmss"));//姓名
-		    }
+		    json.put("Name", user.getName());//姓名
+		    
+//		    if(user.getName() != null && !"".equals(user.getName())){
+//		        json.put("Name", user.getName());//姓名
+//		    }else{
+//		    	json.put("Name", "匿名"+ DateUtils.datetoStr(new Date(), "yyyyMMddHHmmss"));//姓名
+//		    }
 		   
 		    if(user.getBirthday() != null ){
 		         json.put("Birthday__c", DateUtils.datetoStr(user.getBirthday(), "yyyy-MM-dd"));//生日

@@ -583,5 +583,18 @@ public class StringUtil {
 
         return retData;
     }
+    
+    public static String padLeftStr(Integer index){
+    	    	           	
+    	 String result = "" + index;
+    	 int j = 5 - result.length();
+    	 if(result.length() < 5){
+    		 for(int i = 0 ; i < j ; i++){
+    			 result = "0" + result;
+    		 }
+    	 }
+    	 
+    	 return result;
+    }
 
 }
