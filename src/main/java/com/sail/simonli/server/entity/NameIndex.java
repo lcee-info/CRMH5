@@ -2,14 +2,16 @@ package com.sail.simonli.server.entity;
 
 public class NameIndex {
 	
-	 private Integer index;
+	 private Integer nameindex;
 
-	 public Integer getIndex() {
-		return index;
-	 }
+	public Integer getNameindex() {
+		return nameindex;
+	}
 
-	 public void setIndex(Integer index) {
-		this.index = index;
-	 }
+	public void setNameindex(Integer nameindex) {
+		this.nameindex = nameindex;
+	}
+
+	
 	 
 }

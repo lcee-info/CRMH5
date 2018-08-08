@@ -89,13 +89,13 @@ public class UserService {
 		   if(user.getName() == null || "".equals(user.getName())){
 			   
 			    NameIndex nameIndex =  nameIndexMapper.selectNameIndex();
-			    Integer index = nameIndex.getIndex();
+			    Integer index = nameIndex.getNameindex();
 				if(index == null || index == 0){
 		    		 index = 1;
 		    	}else{
 		    		 index = 1 + index;
 		    	}
-				nameIndex.setIndex(index);
+				nameIndex.setNameindex(index);
 				String result = StringUtil.padLeftStr(index);
 				user.setName("匿名" + result);
 				nameIndexMapper.updateByPrimaryKeySelective(nameIndex);
