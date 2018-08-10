@@ -97,7 +97,7 @@ public class UserService {
 		    	}
 				nameIndex.setNameindex(index);
 				String result = StringUtil.padLeftStr(index);
-				user.setName("匿名" + result);
+				user.setName("用户" + result);
 				nameIndexMapper.updateByPrimaryKeySelective(nameIndex);
 		   }
 		   		   
