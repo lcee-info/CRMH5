@@ -6011,9 +6011,9 @@ Device/OS Detection
     input: undefined, // 默认值
     min: undefined, // YYYY-MM-DD 最大最小值只比较年月日，不比较时分秒
     max: undefined,  // YYYY-MM-DD
-    yearSplit: ' ',
-    monthSplit: ' ',
-    dateSplit: '',  // 默认为空
+    yearSplit: '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;',
+    monthSplit: '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;',
+    dateSplit: ' ',  // 默认为空
     datetimeSplit: ' ',  // 日期和时间之间的分隔符，不可为空
     monthes: ('01 02 03 04 05 06 07 08 09 10 11 12').split(' '),
     years: (function () {
