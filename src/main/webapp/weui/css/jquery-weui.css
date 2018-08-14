@@ -994,7 +994,7 @@ body {
   justify-content: center;
   width: 100%;
   padding: 0;
-  text-align: right;
+  text-align: center;
   font-size: 1rem;
   font-weight: normal;
   -webkit-mask-box-image: -webkit-linear-gradient(bottom, transparent, transparent 5%, white 20%, white 80%, transparent 95%, transparent);
