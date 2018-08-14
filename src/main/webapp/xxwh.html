@@ -70,6 +70,8 @@ body{
 		        <input type="hidden" id="cityName" name="cityName">
 		        <input type="hidden" id="countryName" name="countryName">
 		        <input type="hidden" id="city" name="city">
+			    <input type="hidden" id="flag" name="flag" value="0">
+			    <input type="hidden" id="flagbrithday" name="flagbrithday" value="0">
 		        
 				  <div style="height:35px">
 				  </div>
@@ -105,7 +107,7 @@ body{
 				   </div>
 					<div class="weui-cell__bd">
 						 <!-- <input type="text" id="birthday" name="birthday" data-toggle='date' class="weui-input"/> -->
-						 <input class="weui-input" type="text"  name="birthday" id='datetime-picker'/>
+						 <input class="weui-input" type="text"   name="birthday" id='datetime-picker'/>
 					</div>
 		          </div>
 		          
@@ -141,6 +143,10 @@ body{
 <script src="./js/common.js"></script>
 <script>
 $.showLoading("数据加载中...");
+var cityVal = "";
+var cityCode = "";
+var birthdayVal = "";
+
 
   $(function() {
     FastClick.attach(document.body);
@@ -150,7 +156,20 @@ $.showLoading("数据加载中...");
     onChange: function (picker, values, displayValues) {//选择后触发的事件
     	$("#city").val(values);
     	$("#cityName").val(displayValues);
-    	}
+    	},
+    onClose:function (picker, values, displayValues) {
+            if(cityVal.length>0){
+                cityVal = cityVal.replace(',',' ').replace(',',' ');
+                if($('#flag').val()>0){
+				}else {
+                    $("#city_picker").val(cityVal);
+                    $("#city").val(cityCode);
+                    $("#cityName").val(cityVal);
+				}
+			}
+            $('#flag').val(0);
+            $('#flagbrithday').val(0);
+        }
 	});
 	
   $("#sumbit").click(function(){
@@ -211,6 +230,7 @@ $.showLoading("数据加载中...");
     					 $("#mobile").val(user.mobile);
     					 //$("#birthday").val(user.birthday);
     					 initbirthday(user.birthday);
+                        birthdayVal = user.birthday;
     					 $("#sex").val(user.sex);
     					 if(user.country){
 							  $("#country").val(user.country);
@@ -219,7 +239,9 @@ $.showLoading("数据加载中...");
 						 }
     					// $("#countryName").val(user.countryName);
     					 $("#city_picker").val(user.cityName);
+                        cityVal = user.cityName;
     					 $("#city").val(user.city);
+                        cityCode = user.city;
     					 $("#cityName").val(user.cityName);
     					 //$(".personTop").css("background-image","url(http://wx.qlogo.cn/mmopen/zhK3MN44IcibtzxZibicddSyp4qVX3rTtfMZsXQwa5mArMmI4A44uJgQyevo9VhePyUbv6MwhsWTzrqttXsUdzJL0LcT5I9reGA/0)");
     					 if(user.headimgurl!=''){
@@ -252,7 +274,15 @@ $.showLoading("数据加载中...");
     	    $("#datetime-picker").datetimePicker({
                  times: function () {return [ { values: [] } ];},
   			     value: birthday,
-  		         onChange: function (picker, values, displayValues) {}
+  		         onChange: function (picker, values, displayValues) {},
+                 onClose:function (picker, values, displayValues) {
+                        if($('#flag').val()>0){
+                        }else {
+                            $("#datetime-picker").val(birthdayVal);
+                        }
+                    $('#flag').val(0);
+                    $('#flagbrithday').val(0);
+                }
   		    });
        }
       

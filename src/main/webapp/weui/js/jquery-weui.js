@@ -4591,6 +4591,8 @@ Device/OS Detection
   $(document).on("click", ".close-picker", function() {
     var pickerToClose = $('.weui-picker-modal.weui-picker-modal-visible');
     if (pickerToClose.length > 0) {
+      $('#flag').val(1);
+      $('#flagbrithday').val(1);
       $.closePicker(pickerToClose);
     }
   });
