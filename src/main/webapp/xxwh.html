@@ -89,11 +89,11 @@ body{
 					 <label class="weui-label">性别</label>
 				   </div>
 					<div class="weui-cell__bd">
-						<select class="weui-select" name="sex" id="sex">
-						<option value="">请选择</option>
-		                <option value="1">男</option>
-		                <option value="2">女</option> 
-		            </select>
+					   <select class="weui-select" name="sex" id="sex">
+						  <option value="">请选择</option>
+		                  <option value="1">男</option>
+		                  <option value="2">女</option> 
+		               </select>
 					</div>
 		          </div>
 		          
@@ -243,7 +243,12 @@ $.showLoading("数据加载中...");
        
        function initbirthday(birthday){
     	   
-    	    var birthday = birthday + " \n";
+    	    if(birthday == null){
+    	    	birthday = CurentTime();
+    	    }
+    	    
+    	    birthday = birthday + " \n";
+    	    
     	    $("#datetime-picker").datetimePicker({
                  times: function () {return [ { values: [] } ];},
   			     value: birthday,
