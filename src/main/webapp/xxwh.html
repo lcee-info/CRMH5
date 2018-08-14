@@ -274,7 +274,10 @@ var birthdayVal = "";
     	    $("#datetime-picker").datetimePicker({
                  times: function () {return [ { values: [] } ];},
   			     value: birthday,
-  		         onChange: function (picker, values, displayValues) {},
+  		         onChange: function (picker, values, displayValues) {
+				   picker.cols[1].content='-';
+			       picker.cols[3].content='-';
+				 },
                  onClose:function (picker, values, displayValues) {
                         if($('#flag').val()>0){
                         }else {
