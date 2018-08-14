@@ -146,7 +146,7 @@ $.showLoading("数据加载中...");
     FastClick.attach(document.body);
 	$("#city_picker").cityPicker({
     title: "请选择地址",
-    showDistrict: false,
+    showDistrict: true,
     onChange: function (picker, values, displayValues) {//选择后触发的事件
     	$("#city").val(values);
     	$("#cityName").val(displayValues);

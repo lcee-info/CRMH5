@@ -6,9 +6,9 @@ import java.util.Set;
 
 public class CountryMap {
 	
-	private static HashMap<String,String>  cityMap =new HashMap<String,String>();
+	//private static HashMap<String,String>  cityMap =new HashMap<String,String>();
 	private static HashMap<String,String>  cityNameMap =new HashMap<String,String>();
-	private static HashMap<String,String>  provinceMap =new HashMap<String,String>();
+	//private static HashMap<String,String>  provinceMap =new HashMap<String,String>();
 	
 	static {
 		cityNameMap.put("110000","北京市");
@@ -2940,7 +2940,7 @@ public class CountryMap {
 		cityNameMap.put("820000","澳门特别行政区");
 
 
-		cityMap.put("440200", "shaoguanshi");
+		/*cityMap.put("440200", "shaoguanshi");
 		cityMap.put("440300", "shenzhenshi");
 		cityMap.put("440400", "zhuhaishi");
 		cityMap.put("440500", "shantoushi");
@@ -3311,6 +3311,8 @@ public class CountryMap {
 		cityMap.put("820200", "dangzai");
 		cityMap.put("820300", "luhuan");
 		cityMap.put("440100", "guangzhou");
+
+
 		provinceMap.put("440000", "guangdong");
 		provinceMap.put("310000", "Shanghai");
 		provinceMap.put("320000", "jiangsu");
@@ -3343,11 +3345,11 @@ public class CountryMap {
 		provinceMap.put("650000", "xinjiang");
 		provinceMap.put("150000", "neimenggu");
 		provinceMap.put("810000", "xianggang");
-		provinceMap.put("820000", "aomen");
+		provinceMap.put("820000", "aomen");*/
 	}
 	
 	
-	public static String getCityMap(String key) {
+/*	public static String getCityMap(String key) {
 		
 		return cityMap.get(key);
 		
@@ -3357,15 +3359,33 @@ public class CountryMap {
 		
 		return provinceMap.get(key);
 		
-	}
+	}*/
 	
 	public static String getCityNameMap(String key) {
 		
 		return cityNameMap.get(key);
 		
 	}
+
+	public static String getCodeByNameMap(String name) {
+
+		Set<String> set = cityNameMap.keySet();
+
+		Iterator<String> iterator = set.iterator();
+
+		while(iterator.hasNext()){
+
+			String key =iterator.next();
+
+			if(cityNameMap.get(key).equals(name)) {
+				return key;
+
+			}
+		}
+		return null;
+	}
 	
-	public static String getCityCodeMap(String apiname) {
+	/*public static String getCityCodeMap(String apiname) {
 		
 		Set<String> set = cityMap.keySet();
 		
@@ -3405,5 +3425,5 @@ public static String getProvinceCodeMap(String apiname) {
 		
 		return null;
 		
-	}
+	}*/
 }

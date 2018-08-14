@@ -46,7 +46,7 @@ public class Utils {
 		    /**
 		     * 省市需要处理？？？？？？？？？
 		     */
-		    String provinceCode="",cityCode="";
+		    String provinceCode="",cityCode="", countyLevelCityCode = "";
 		    String  city = user.getCity();
 
 		    if(city != null && !"".equals(city)){
@@ -55,10 +55,14 @@ public class Utils {
 				provinceCode=province[0];
 
 				cityCode=province[1];
+
+				countyLevelCityCode = province[2];
 		    
-				json.put("Province__c", CountryMap.getProvinceMap(provinceCode)); //省
+				json.put("Province__c", CountryMap.getCityNameMap(provinceCode)); //省
 				    
-				json.put("City__c",CountryMap.getCityMap(cityCode)); //市
+				json.put("City__c",CountryMap.getCityNameMap(cityCode)); //市
+
+				json.put("CountyLevelCity__c",CountryMap.getCityNameMap(countyLevelCityCode)); //区
 		    }
 		    
 		    
@@ -91,7 +95,7 @@ public class Utils {
 		
 		public static UserInfo query(UserInfo user) {//查询
 			
-			String sql = "select+Id,name,Country__c,Province__c,City__c,CustomerName__c,Birthday__c,Gender__c+from+Account+where+PhoneNumber__c='"+user.getMobile()+"'";
+			String sql = "select+Id,name,Country__c,Province__c,City__c,CountyLevelCity__c,CustomerName__c,Birthday__c,Gender__c+from+Account+where+PhoneNumber__c='"+user.getMobile()+"'";
 
 			JSONArray jsonArray=SFDCDataCtrlUtil.getForSFDCData(sql);
 			
@@ -124,13 +128,21 @@ public class Utils {
 				if(!obj.isNull("Province__c")){
 					Province__c = obj.getString("Province__c");
 				}
+
+				String CountyLevelCity__c = null;
+				if(!obj.isNull("CountyLevelCity__c")){
+					CountyLevelCity__c = obj.getString("CountyLevelCity__c");
+				}
+
 				
-				if(City__c!=null&&Province__c!=null) {								
+				if(City__c!=null&&Province__c!=null&&CountyLevelCity__c!=null) {
 					
-					String province_code=CountryMap.getProvinceCodeMap(Province__c);
-					String city_code=CountryMap.getCityCodeMap(City__c);
-					user.setCity(CountryMap.getProvinceCodeMap(Province__c)+","+CountryMap.getCityCodeMap(City__c));
-					user.setCityName(CountryMap.getCityNameMap(province_code)+","+CountryMap.getCityNameMap(city_code));
+					String province_code=CountryMap.getCodeByNameMap(Province__c);
+					String city_code=CountryMap.getCodeByNameMap(City__c);
+					String district_code=CountryMap.getCodeByNameMap(CountyLevelCity__c);
+
+					user.setCity(province_code+","+city_code+","+district_code);
+					user.setCityName(CountryMap.getCityNameMap(province_code)+","+CountryMap.getCityNameMap(city_code)+","+CountryMap.getCityNameMap(district_code));
 
 				}
 
