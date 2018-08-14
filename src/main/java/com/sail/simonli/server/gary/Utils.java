@@ -138,11 +138,14 @@ public class Utils {
 				if(City__c!=null&&Province__c!=null&&CountyLevelCity__c!=null) {
 					
 					String province_code=CountryMap.getCodeByNameMap(Province__c);
+					if(null == province_code ){
+						province_code=CountryMap.getCodeByNameMap(Province__c+"市");
+					}
 					String city_code=CountryMap.getCodeByNameMap(City__c);
 					String district_code=CountryMap.getCodeByNameMap(CountyLevelCity__c);
 
 					user.setCity(province_code+","+city_code+","+district_code);
-					user.setCityName(CountryMap.getCityNameMap(province_code)+","+CountryMap.getCityNameMap(city_code)+","+CountryMap.getCityNameMap(district_code));
+					user.setCityName(Province__c+","+CountryMap.getCityNameMap(city_code)+","+CountryMap.getCityNameMap(district_code));
 
 				}
 
