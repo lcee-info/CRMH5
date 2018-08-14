@@ -6018,7 +6018,7 @@ Device/OS Detection
     monthes: ('01 02 03 04 05 06 07 08 09 10 11 12').split(' '),
     years: (function () {
       var arr = [];
-      for (var i = 1950; i <= 2030; i++) { arr.push(i); }
+      for (var i = 1900; i <= 2050; i++) { arr.push(i); }
       return arr;
     })(),
     times: function () {
