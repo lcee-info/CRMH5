@@ -170,6 +170,8 @@ public class Utils {
 				
 				if(Birthday__c!=null) {
 					
+					user.setStrBirthday(Birthday__c);
+					
 					SimpleDateFormat sformat = new SimpleDateFormat("yyyy-MM-dd");
 					
 					user.setBirthday(DateUtils.str2Date(Birthday__c, sformat));

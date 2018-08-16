@@ -41,6 +41,8 @@ public class UserInfo {
     
     private String msgCode;
     
+    private String strBirthday;
+    
     public String getMsgCode() {
 		return msgCode;
 	}
@@ -192,4 +194,13 @@ public class UserInfo {
     public void setSubscribe(String subscribe) {
         this.subscribe = subscribe == null ? null : subscribe.trim();
     }
+
+	public String getStrBirthday() {
+		return strBirthday;
+	}
+
+	public void setStrBirthday(String strBirthday) {
+		this.strBirthday = strBirthday;
+	}
+    
 }
